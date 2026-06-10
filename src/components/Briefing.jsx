@@ -1,5 +1,6 @@
 import { CheckCircle2, ChevronRight, Clock, Eye, ShieldCheck } from 'lucide-react';
 import { INSIGHTS } from '../data/insights';
+import { AgentTrace } from './AgentTrace';
 
 export function Briefing({ activeDimensions, onNavigate }) {
   const insight = INSIGHTS[0];
@@ -57,6 +58,8 @@ export function Briefing({ activeDimensions, onNavigate }) {
         </div>
         <p className="text-body-large">{insight.narrative}</p>
       </section>
+
+      <AgentTrace activeDimensions={activeDimensions} />
 
       <div className="briefing-grid">
         <section className="report-card important-conflict" aria-labelledby="conflict-title">

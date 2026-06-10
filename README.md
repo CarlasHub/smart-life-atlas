@@ -104,11 +104,12 @@ This is not a live Google Cloud deployment. A full deployment still requires a G
 2. Start on Home and read: "Good morning, Carla. Here is what Atlas noticed."
 3. Open Connect and treat each life-area card as a simulated Google consent scope.
 4. Open Briefing to view the Post-Op Compliance Trap.
-5. Inspect evidence cards for the procedure, 36-hour no-fly restriction, 19:30 flight, Friday 09:00 legal signing, Friday 12:00 legal deadline, $250,000 valuation risk, and Clause 8.1 remote notary workaround.
-6. Open Memory and review the 11 June 2022 Lisbon answer with confidence, evidence, and uncertainty.
-7. Open Ask Atlas and try the preset questions.
-8. Toggle life areas off to verify that Atlas refuses to answer when the required authorized source is unavailable.
-9. Open Guide and review the Platform status section for the static demo, Agent Builder proof, and backend path.
+5. Use the Agent trace to watch Atlas connect approved sources, recovery rules, deadlines, evidence, and the Clause 8.1 workaround.
+6. Inspect evidence cards for the procedure, 36-hour no-fly restriction, 19:30 flight, Friday 09:00 legal signing, Friday 12:00 legal deadline, $250,000 valuation risk, and Clause 8.1 remote notary workaround.
+7. Open Memory and review the 11 June 2022 Lisbon answer with confidence, evidence, and uncertainty.
+8. Open Ask Atlas and try the preset questions.
+9. Toggle life areas off to verify that Atlas refuses to answer when the required authorized source is unavailable.
+10. Open Guide and review the Platform status section for the static demo, Agent Builder proof, and backend path.
 
 The demo opens with Health, Travel, Integrity, Family, and Memory enabled so the main narrative is visible immediately. Money remains off by default. Turning any required area off removes it from the reasoning path.
 

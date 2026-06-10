@@ -96,6 +96,7 @@
   .briefing-grid,
   .briefing-grid.secondary,
   .memory-columns,
+  .trace-workbench,
   .platform-status-grid,
   .app-source-grid {
     grid-template-columns: 1fr;
@@ -166,6 +167,7 @@
   .home-hero,
   .briefing-hero,
   .assistant-hero,
+  .agent-trace,
   .life-strip,
   .life-brief-panel,
   .memory-search,
@@ -204,6 +206,22 @@
   .persona-grid,
   .resolution-list {
     grid-template-columns: 1fr;
+  }
+
+  .agent-trace-header {
+    grid-template-columns: 1fr;
+  }
+
+  .trace-node {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+
+    .trace-index {
+      display: none;
+    }
+  }
+
+  .trace-score {
+    justify-items: start;
   }
 
   .app-item,
