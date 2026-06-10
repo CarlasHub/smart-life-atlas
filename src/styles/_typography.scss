@@ -1,0 +1,105 @@
+@mixin display-large {
+  font-family: var(--font-sans);
+  font-size: 3.5rem;
+  line-height: 1.03;
+  letter-spacing: 0;
+  font-weight: 650;
+}
+
+@mixin headline-large {
+  font-family: var(--font-sans);
+  font-size: 2.25rem;
+  line-height: 1.12;
+  letter-spacing: 0;
+  font-weight: 650;
+}
+
+@mixin headline-medium {
+  font-family: var(--font-sans);
+  font-size: 1.7rem;
+  line-height: 1.18;
+  letter-spacing: 0;
+  font-weight: 650;
+}
+
+@mixin title-large {
+  font-family: var(--font-sans);
+  font-size: 1.25rem;
+  line-height: 1.32;
+  letter-spacing: 0;
+  font-weight: 650;
+}
+
+@mixin title-medium {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.45;
+  letter-spacing: 0;
+  font-weight: 650;
+}
+
+@mixin body-large {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.65;
+  letter-spacing: 0;
+  font-weight: 400;
+}
+
+@mixin body-medium {
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  letter-spacing: 0;
+  font-weight: 400;
+}
+
+@mixin body-small {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  line-height: 1.45;
+  letter-spacing: 0;
+  font-weight: 400;
+}
+
+@mixin label-large {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  line-height: 1.35;
+  letter-spacing: 0;
+  font-weight: 650;
+}
+
+@mixin label-medium {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  line-height: 1.35;
+  letter-spacing: 0;
+  font-weight: 650;
+}
+
+@mixin label-small {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  line-height: 1.35;
+  letter-spacing: 0;
+  font-weight: 650;
+}
+
+body {
+  @include body-large;
+  color: var(--md-sys-color-on-background);
+  background: var(--md-sys-color-background);
+}
+
+.text-display-large { @include display-large; }
+.text-headline-large { @include headline-large; }
+.text-headline-medium { @include headline-medium; }
+.text-title-large { @include title-large; }
+.text-title-medium { @include title-medium; }
+.text-body-large { @include body-large; }
+.text-body-medium { @include body-medium; }
+.text-body-small { @include body-small; }
+.text-label-large { @include label-large; }
+.text-label-medium { @include label-medium; }
+.text-label-small { @include label-small; }

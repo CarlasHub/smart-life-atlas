@@ -1,0 +1,255 @@
+@media (max-width: 1100px) {
+  :root {
+    --sidebar-width: 5.75rem;
+  }
+
+  .nav-rail {
+    padding-inline: var(--space-s);
+  }
+
+  .brand-copy,
+  .m3-nav-item .nav-label {
+    display: none;
+  }
+
+  .m3-nav-item {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    padding-inline: 0.35rem;
+  }
+
+  .life-area-grid,
+  .evidence-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .persona-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 860px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(0, 1fr) auto;
+  }
+
+  .main-viewport {
+    grid-row: 1;
+  }
+
+  .nav-rail {
+    position: sticky;
+    bottom: 0;
+    top: auto;
+    z-index: 10;
+    grid-row: 2;
+    min-height: auto;
+    padding: 0.45rem 0.5rem calc(0.45rem + env(safe-area-inset-bottom));
+    border-right: 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .nav-brand {
+    display: none;
+  }
+
+  .nav-items {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 0.2rem;
+    width: 100%;
+  }
+
+  .m3-nav-item {
+    min-height: 4.15rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding: 0.3rem 0.2rem;
+    border-radius: var(--md-sys-shape-corner-large);
+    text-align: center;
+
+    .icon-container {
+      width: 2rem;
+      height: 1.85rem;
+    }
+
+    .nav-label {
+      display: block;
+      font-size: 0.68rem;
+      line-height: 1.15;
+      white-space: normal;
+      overflow-wrap: anywhere;
+    }
+  }
+
+  .main-content {
+    padding: var(--space-l);
+  }
+
+  .home-hero,
+  .briefing-hero,
+  .assistant-hero,
+  .home-grid,
+  .personal-context-strip,
+  .briefing-grid,
+  .briefing-grid.secondary,
+  .memory-columns,
+  .app-source-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-hero {
+    min-height: auto;
+  }
+
+  .home-hero-overlay {
+    background:
+      linear-gradient(180deg, rgba(255, 253, 248, 0.98) 0%, rgba(255, 253, 248, 0.9) 52%, rgba(255, 253, 248, 0.5) 100%),
+      linear-gradient(0deg, rgba(32, 33, 36, 0.14), rgba(32, 33, 36, 0));
+  }
+
+  .home-hero-art {
+    object-position: 64% 50%;
+  }
+
+  .assistant-presence,
+  .assistant-avatar-card,
+  .smart-avatar-card,
+  .confidence-card {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .assistant-avatar-stack {
+    justify-items: stretch;
+  }
+
+  .avatar-intelligence dt {
+    justify-content: flex-start;
+  }
+
+  .status-stack span {
+    justify-content: flex-start;
+  }
+
+  .insight-feature {
+    grid-template-columns: 1fr;
+  }
+
+  .insight-support {
+    align-items: flex-start;
+  }
+
+  .locked-panel {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .main-content {
+    padding: var(--space-m);
+    gap: var(--space-l);
+  }
+
+  .text-display-large {
+    font-size: 2.45rem;
+    line-height: 1.06;
+  }
+
+  .text-headline-medium {
+    font-size: 1.45rem;
+  }
+
+  .home-hero,
+  .briefing-hero,
+  .assistant-hero,
+  .life-strip,
+  .life-brief-panel,
+  .memory-search,
+  .report-card,
+  .impact-summary,
+  .soft-panel,
+  .memory-answer {
+    padding: var(--space-m);
+    border-radius: var(--md-sys-shape-corner-large);
+  }
+
+  .hero-signal-dock {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .hero-signal {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero-actions,
+  .guide-footer,
+  .preset-queries {
+    align-items: stretch;
+    flex-direction: column;
+
+    .m3-button {
+      width: 100%;
+    }
+  }
+
+  .life-area-grid,
+  .evidence-grid,
+  .persona-grid,
+  .resolution-list {
+    grid-template-columns: 1fr;
+  }
+
+  .app-item,
+  .step-card,
+  .timeline-item,
+  .history-card {
+    grid-template-columns: 1fr;
+  }
+
+  .app-meta {
+    align-items: flex-start;
+  }
+
+  .message-item {
+    max-width: 100%;
+  }
+
+  .chat-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .chat-controls,
+  .chat-header,
+  .message-list {
+    padding-inline: var(--space-m);
+  }
+
+  .confidence {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 420px) {
+  .m3-nav-item .nav-label {
+    font-size: 0.62rem;
+  }
+
+  .nav-items {
+    gap: 0.1rem;
+  }
+
+  .m3-button {
+    white-space: normal;
+    min-height: 3rem;
+  }
+
+  .memory-question-box {
+    border-radius: var(--md-sys-shape-corner-large);
+  }
+}
