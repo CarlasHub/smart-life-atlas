@@ -108,6 +108,7 @@ This is not a live Google Cloud deployment. A full deployment still requires a G
 6. Open Memory and review the 11 June 2022 Lisbon answer with confidence, evidence, and uncertainty.
 7. Open Ask Atlas and try the preset questions.
 8. Toggle life areas off to verify that Atlas refuses to answer when the required authorized source is unavailable.
+9. Open Guide and review the Platform status section for the static demo, Agent Builder proof, and backend path.
 
 The demo opens with Health, Travel, Integrity, Family, and Memory enabled so the main narrative is visible immediately. Money remains off by default. Turning any required area off removes it from the reasoning path.
 

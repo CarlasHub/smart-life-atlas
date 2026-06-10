@@ -96,6 +96,7 @@
   .briefing-grid,
   .briefing-grid.secondary,
   .memory-columns,
+  .platform-status-grid,
   .app-source-grid {
     grid-template-columns: 1fr;
   }
@@ -170,6 +171,7 @@
   .memory-search,
   .report-card,
   .impact-summary,
+  .platform-status,
   .soft-panel,
   .memory-answer {
     padding: var(--space-m);

@@ -1196,6 +1196,56 @@
   gap: var(--space-s);
 }
 
+.platform-status {
+  display: grid;
+  gap: var(--space-m);
+  padding: var(--space-l);
+  border: 1px solid #c4ddff;
+  border-radius: var(--md-sys-shape-corner-extra-large);
+  background:
+    linear-gradient(135deg, rgba(232, 240, 254, 0.88), rgba(255, 255, 255, 0.96)),
+    var(--md-sys-color-surface);
+  box-shadow: var(--shadow-soft);
+}
+
+.platform-status-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-s);
+}
+
+.platform-card {
+  min-width: 0;
+  display: grid;
+  gap: 0.65rem;
+  align-content: start;
+  padding: var(--space-m);
+  border: 1px solid rgba(26, 115, 232, 0.12);
+  border-radius: var(--md-sys-shape-corner-large);
+  background: rgba(255, 255, 255, 0.78);
+
+  p {
+    color: var(--md-sys-color-on-surface-variant);
+  }
+}
+
+.platform-icon {
+  width: 2.75rem;
+  height: 2.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+  background: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+}
+
+.platform-note {
+  margin: 0;
+  color: var(--md-sys-color-on-surface-variant);
+  @include body-medium;
+}
+
 .step-card {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
