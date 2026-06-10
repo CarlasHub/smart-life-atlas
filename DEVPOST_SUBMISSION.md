@@ -56,12 +56,34 @@ The current prototype uses local synthetic data to demonstrate this architecture
 - Sass
 - Lucide React
 - Local deterministic synthetic data
+- Google Cloud Agent Builder instructions for the Atlas Life Story Agent
+- MongoDB MCP integration proof using `@mongodb-js/mongodb-mcp-server`
+- MongoDB-shaped synthetic seed collections for life signals, evidence, memory, and resolution paths
+
+## Agent Builder and MongoDB MCP Proof
+
+The repository includes a clean integration package under `agent/`:
+
+- `agent/atlas-agent.md` defines the Atlas Life Story Agent instructions for Google Cloud Agent Builder.
+- `agent/mongodb/seed-data.json` models the approved life-signal store as MongoDB collections.
+- `agent/mongodb/mcp-server.example.json` shows how to start the official MongoDB MCP server package.
+- `scripts/agent-proof.mjs` verifies the source-gated reasoning flow locally with the same synthetic evidence used by the app.
+
+Judges can run:
+
+```bash
+npm run agent:proof
+```
+
+The proof reconstructs the Post-Op Compliance Trap from MongoDB-shaped evidence IDs, confirms the 08:00 procedure, 36-hour no-fly restriction, 19:30 flight, Friday 09:00 legal signing, Friday 12:00 deadline, $250,000 valuation risk, and Clause 8.1 remote notary workaround.
 
 ## Important Technical Note
 
-This submitted prototype does not use real OAuth, real Gmail, real Calendar APIs, real health data, real financial data, a backend, MongoDB, Agent Builder, or the Gemini API yet. All data is synthetic and local. Source toggles control deterministic demo logic so judges can verify privacy, consent, evidence, and source-gated reasoning safely.
+This submitted web app does not use real OAuth, real Gmail, real Calendar APIs, real health data, real financial data, a backend, or the Gemini API yet. All app data is synthetic and local. Source toggles control deterministic demo logic so judges can verify privacy, consent, evidence, and source-gated reasoning safely.
 
-The future implementation plan is to add Google Sign-In, request narrow OAuth scopes, move the deterministic reasoning layer into Gemini, orchestrate approved actions through Google Agent Builder, and query a secure life-signal store through MongoDB MCP.
+The repository now includes the credential-ready Agent Builder and MongoDB MCP proof described above. A live deployment still requires a Google Cloud project, Google Cloud Agent Builder configuration, a MongoDB Atlas database, and secrets that are intentionally not committed.
+
+The future implementation plan is to add Google Sign-In, request narrow OAuth scopes, move the deterministic reasoning layer into Gemini, orchestrate approved actions through Google Cloud Agent Builder, and query a secure life-signal store through MongoDB MCP.
 
 ## Suggested Demo Flow
 

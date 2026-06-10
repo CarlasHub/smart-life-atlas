@@ -2,10 +2,12 @@
   "name": "smart-life-atlas",
   "private": true,
   "version": "0.0.0",
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "agent:proof": "node scripts/agent-proof.mjs",
     "lint": "eslint .",
     "preview": "vite preview"
   },

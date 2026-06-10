@@ -2,7 +2,9 @@
 
 Atlas is a Google ecosystem concept for a personal intelligence companion. It is designed for a future where a user signs in with their Google Account, connects Google apps and third-party apps that use Google Sign-In, explicitly authorizes trusted life-area access, and lets Atlas reason across approved signals from Gmail, Google Calendar, Drive/Docs, Maps-style travel context, health records, finance records, family messages, school portals, travel apps, finance apps, and long-term memory.
 
-The submitted build is a React/Vite static prototype. It has no backend, no real OAuth, no real APIs, and no real personal data. The Connect screen simulates Google-style consent gates with local synthetic data so judges can see how authorization, source gating, evidence, and reasoning would work before real integrations are added.
+The submitted web app is a React/Vite static prototype. It has no backend, no real OAuth, no real APIs, and no real personal data. The Connect screen simulates Google-style consent gates with local synthetic data so judges can see how authorization, source gating, evidence, and reasoning would work before real integrations are added.
+
+The repository also includes a clean Agent Builder and MongoDB MCP integration proof under `agent/`. It provides Agent Builder instructions, MongoDB-shaped seed collections, an MCP server configuration example using `@mongodb-js/mongodb-mcp-server`, and a local verifier script that proves the same source-gated reasoning contract without requiring cloud credentials.
 
 ## Product Concept
 
@@ -40,7 +42,7 @@ Atlas is positioned as a life intelligence layer for the Google ecosystem:
 - Health Connect or provider portals: recovery rules and medical constraints.
 - Gemini: evidence-grounded reasoning over approved signals.
 - Google Agent Builder: safe action orchestration, such as drafting a legal workaround request.
-- MongoDB MCP: future secure life-signal memory store for cross-session continuity.
+- MongoDB MCP: secure life-signal memory store for cross-session continuity, demonstrated in this repo with seed collections and a verifier.
 
 The current demo does not connect to these services. It shows the intended product experience using local synthetic equivalents.
 
@@ -66,6 +68,35 @@ Atlas is not meant to be another dashboard. The agent model is:
 5. Act: Google Agent Builder coordinates safe next steps only after user approval.
 
 The daily story is the core product. It should feel like: "Here is what is happening in your life, here is what I noticed, here is the evidence, and here is the next safe move."
+
+## Agent Builder + MongoDB MCP Proof
+
+The `agent/` folder turns the static prototype into a judge-readable technical plan for the required agent architecture:
+
+- `agent/atlas-agent.md`: instructions for an Atlas Life Story Agent in Google Cloud Agent Builder.
+- `agent/mongodb/seed-data.json`: synthetic MongoDB collections for life areas, life signals, evidence, resolution paths, memory events, and deterministic agent tests.
+- `agent/mongodb/mcp-server.example.json`: MCP server configuration for the official `@mongodb-js/mongodb-mcp-server` package.
+- `scripts/agent-proof.mjs`: local proof that reconstructs the Post-Op Compliance Trap from MongoDB-shaped evidence IDs and enforces source-gated refusal.
+
+Run the proof:
+
+```bash
+npm run agent:proof
+```
+
+Run the gated refusal check:
+
+```bash
+node scripts/agent-proof.mjs --enabled=health,travel
+```
+
+Run the memory check:
+
+```bash
+node scripts/agent-proof.mjs --query=memory
+```
+
+This is not a live Google Cloud deployment. A full deployment still requires a Google Cloud project, Google Cloud Agent Builder configuration, a MongoDB Atlas database, and credentials that are not committed to this repo.
 
 ## Demo Flow
 
@@ -138,13 +169,15 @@ If a required life area is off, Ask Atlas returns: "I cannot answer that because
 
 This matters for the hackathon story: Atlas is not just a UI mockup. The source gates affect the deterministic reasoning path. Turning a source off removes it from the briefing, memory retrieval, and assistant answers.
 
+The `agent/mongodb/seed-data.json` file mirrors the same story as MongoDB collections so the future Gemini and Agent Builder version can query life signals, evidence, resolution paths, and memory through MongoDB MCP.
+
 ## Future Platform Plan
 
 - Google Sign-In: authenticate the user with a familiar Google Account entry point.
 - OAuth consent: request narrow scopes for Gmail, Calendar, Drive/Docs, and other approved sources.
 - Gemini: move deterministic local answers into a grounded reasoning layer that cites evidence.
-- Google Agent Builder: orchestrate approved tools and user-safe resolution flows.
-- MongoDB MCP: query a secure life-signal store through the Model Context Protocol.
+- Google Cloud Agent Builder: orchestrate approved tools and user-safe resolution flows.
+- MongoDB MCP: query the secure life-signal store through the Model Context Protocol using the included seed schema and MCP server configuration.
 - Real integrations: add Gmail, Calendar, Drive/Docs, health, finance, travel, and document connectors only after consent, auditability, and data minimization are designed.
 
 ## Commands
@@ -152,6 +185,7 @@ This matters for the hackathon story: Atlas is not just a UI mockup. The source 
 ```bash
 npm install
 npm run dev
+npm run agent:proof
 npm run build
 npm run lint
 ```

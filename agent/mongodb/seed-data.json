@@ -1,0 +1,276 @@
+{
+  "database": "atlas_life_intelligence",
+  "userId": "demo-carla",
+  "dataPolicy": "Synthetic demo data only. No real account, health, travel, legal, financial, or personal data is included.",
+  "collections": {
+    "life_areas": [
+      {
+        "dimension": "health",
+        "label": "Health",
+        "enabledByDefault": true,
+        "simulatedConsentScope": "Read approved recovery instructions, appointment records, sleep summaries, and physical constraints."
+      },
+      {
+        "dimension": "travel",
+        "label": "Travel",
+        "enabledByDefault": true,
+        "simulatedConsentScope": "Read approved flight confirmations, trip records, transit windows, and likely location context."
+      },
+      {
+        "dimension": "integrity",
+        "label": "Integrity",
+        "enabledByDefault": true,
+        "simulatedConsentScope": "Read approved legal duties, signature requirements, promises, deadlines, and workaround clauses."
+      },
+      {
+        "dimension": "money",
+        "label": "Money",
+        "enabledByDefault": false,
+        "simulatedConsentScope": "Read approved funding windows, valuation exposure, and payment deadlines."
+      },
+      {
+        "dimension": "family",
+        "label": "Family",
+        "enabledByDefault": true,
+        "simulatedConsentScope": "Read approved family messages, care context, school requests, and household commitments."
+      },
+      {
+        "dimension": "memory",
+        "label": "Memory",
+        "enabledByDefault": true,
+        "simulatedConsentScope": "Read approved historical receipts, travel archive entries, calendar memories, and personal timeline records."
+      }
+    ],
+    "life_signals": [
+      {
+        "id": "sig-001",
+        "userId": "demo-carla",
+        "dimension": "health",
+        "timestamp": "2026-06-11T08:00:00Z",
+        "source": "Medical Portal",
+        "connectedThrough": "Google Sign-In concept",
+        "content": "Knee Procedure scheduled @ St. Jude Center.",
+        "usedFor": ["post-op-compliance-trap"]
+      },
+      {
+        "id": "sig-002",
+        "userId": "demo-carla",
+        "dimension": "health",
+        "timestamp": "2026-06-11T10:30:00Z",
+        "source": "Medical Portal",
+        "connectedThrough": "Google Sign-In concept",
+        "content": "Post-op PDF: Must not fly for 36 hours post-anesthesia due to DVT risk.",
+        "restriction": {
+          "type": "no_flying",
+          "durationHours": 36,
+          "startsAfterSignalId": "sig-001"
+        },
+        "usedFor": ["post-op-compliance-trap"]
+      },
+      {
+        "id": "sig-003",
+        "userId": "demo-carla",
+        "dimension": "health",
+        "timestamp": "2026-06-10T22:00:00Z",
+        "source": "Health App",
+        "connectedThrough": "Google Sign-In concept",
+        "content": "Sleep tracking: 5.4h. Recovery capacity: Limited."
+      },
+      {
+        "id": "sig-004",
+        "userId": "demo-carla",
+        "dimension": "travel",
+        "timestamp": "2026-06-11T19:30:00Z",
+        "source": "Gmail",
+        "connectedThrough": "Google Account concept",
+        "content": "Flight UA242: SFO -> JFK (Confirmed).",
+        "usedFor": ["post-op-compliance-trap"]
+      },
+      {
+        "id": "sig-005",
+        "userId": "demo-carla",
+        "dimension": "travel",
+        "timestamp": "2026-06-07T11:00:00Z",
+        "source": "Gmail",
+        "connectedThrough": "Google Account concept",
+        "content": "Travel receipt: United Airlines UA242."
+      },
+      {
+        "id": "sig-006",
+        "userId": "demo-carla",
+        "dimension": "integrity",
+        "timestamp": "2026-06-12T09:00:00Z",
+        "source": "Legal Archive",
+        "connectedThrough": "Google Sign-In concept",
+        "content": "Acquisition Closing: Physical presence required.",
+        "usedFor": ["post-op-compliance-trap"]
+      },
+      {
+        "id": "sig-007",
+        "userId": "demo-carla",
+        "dimension": "integrity",
+        "timestamp": "2026-06-12T09:00:00Z",
+        "source": "Legal Archive",
+        "connectedThrough": "Google Sign-In concept",
+        "content": "Clause 4.2: $250,000 valuation risk if signing is missed.",
+        "usedFor": ["post-op-compliance-trap"]
+      },
+      {
+        "id": "sig-008",
+        "userId": "demo-carla",
+        "dimension": "integrity",
+        "timestamp": "2026-06-12T09:00:00Z",
+        "source": "Legal Archive",
+        "connectedThrough": "Google Sign-In concept",
+        "content": "Clause 8.1: Remote execution allowed with medical cert.",
+        "usedFor": ["post-op-compliance-trap"]
+      },
+      {
+        "id": "sig-009",
+        "userId": "demo-carla",
+        "dimension": "integrity",
+        "timestamp": "2026-06-11T15:00:00Z",
+        "source": "School Portal",
+        "connectedThrough": "Google Sign-In concept",
+        "content": "Signature needed: Leo's field trip permission."
+      },
+      {
+        "id": "sig-010",
+        "userId": "demo-carla",
+        "dimension": "money",
+        "timestamp": "2026-06-12T12:00:00Z",
+        "source": "Finance App",
+        "connectedThrough": "Google Sign-In concept",
+        "content": "Escrow funding deadline: Friday 12:00 PM.",
+        "usedFor": ["post-op-compliance-trap"]
+      },
+      {
+        "id": "sig-011",
+        "userId": "demo-carla",
+        "dimension": "family",
+        "timestamp": "2026-06-10T16:45:00Z",
+        "source": "Messages",
+        "connectedThrough": "Google Sign-In concept",
+        "content": "Message from Mom: Thinking of you for tomorrow's surgery!"
+      }
+    ],
+    "evidence_items": [
+      {
+        "id": "ev-procedure-0800",
+        "signalId": "sig-001",
+        "category": "Health",
+        "label": "Procedure at 08:00",
+        "context": "Medical Portal appointment record",
+        "detail": "Knee procedure scheduled for Thursday at 08:00."
+      },
+      {
+        "id": "ev-no-fly-36h",
+        "signalId": "sig-002",
+        "category": "Health",
+        "label": "No flying for 36 hours",
+        "context": "Post-op instruction PDF",
+        "detail": "Post-anesthesia instructions prohibit flying for 36 hours because of DVT risk."
+      },
+      {
+        "id": "ev-flight-1930",
+        "signalId": "sig-004",
+        "category": "Travel",
+        "label": "Flight at 19:30",
+        "context": "United Airlines confirmation",
+        "detail": "UA242 SFO to JFK is confirmed for Thursday at 19:30."
+      },
+      {
+        "id": "ev-signing-0900",
+        "signalId": "sig-006",
+        "category": "Integrity",
+        "label": "Legal signing Friday 09:00",
+        "context": "Legal Archive signing packet",
+        "detail": "Closing requires presence at 09:00 unless a permitted workaround is invoked."
+      },
+      {
+        "id": "ev-valuation-risk",
+        "signalId": "sig-007",
+        "category": "Money",
+        "label": "$250,000 valuation risk",
+        "context": "Legal Archive Clause 4.2",
+        "detail": "Missing the closing may trigger a valuation adjustment of $250,000."
+      },
+      {
+        "id": "ev-remote-notary",
+        "signalId": "sig-008",
+        "category": "Integrity",
+        "label": "Clause 8.1 remote notary workaround",
+        "context": "Legal Archive Clause 8.1",
+        "detail": "Remote execution is allowed with medical certification."
+      }
+    ],
+    "resolution_paths": [
+      {
+        "id": "res-notary",
+        "challengeId": "post-op-compliance-trap",
+        "label": "Use Clause 8.1 remote notary workaround",
+        "nextStep": "Ask counsel to trigger the remote notary clause with a medical certificate before the Friday 12:00 deadline.",
+        "requiresUserApproval": true,
+        "supportingEvidenceIds": ["ev-no-fly-36h", "ev-remote-notary"]
+      },
+      {
+        "id": "res-flight",
+        "challengeId": "post-op-compliance-trap",
+        "label": "Move the flight outside the recovery window",
+        "nextStep": "Reschedule UA242 to Saturday morning so the 36-hour no-fly instruction is respected.",
+        "requiresUserApproval": true,
+        "supportingEvidenceIds": ["ev-no-fly-36h", "ev-flight-1930"]
+      }
+    ],
+    "memory_events": [
+      {
+        "id": "sig-012",
+        "userId": "demo-carla",
+        "dimension": "memory",
+        "timestamp": "2022-06-25T10:00:00Z",
+        "source": "Life History Archive",
+        "connectedThrough": "Google Sign-In concept",
+        "content": "Flight LIS -> SFO (Travel Archive).",
+        "place": "Lisbon, Portugal"
+      },
+      {
+        "id": "sig-013",
+        "userId": "demo-carla",
+        "dimension": "memory",
+        "timestamp": "2022-06-11T13:30:00Z",
+        "source": "Life History Archive",
+        "connectedThrough": "Google Sign-In concept",
+        "content": "Receipt: Brunch @ Pasteis de Belem, Lisbon.",
+        "place": "Belem, Lisbon, Portugal"
+      },
+      {
+        "id": "sig-014",
+        "userId": "demo-carla",
+        "dimension": "memory",
+        "timestamp": "2022-06-11T09:00:00Z",
+        "source": "Life History Archive",
+        "connectedThrough": "Google Sign-In concept",
+        "content": "Calendar: Family Brunch - Belem.",
+        "place": "Belem, Lisbon, Portugal"
+      }
+    ],
+    "agent_tests": [
+      {
+        "id": "post-op-compliance-trap",
+        "question": "Why is tomorrow risky?",
+        "requiredDimensions": ["health", "travel", "integrity"],
+        "optionalDimensions": ["money", "family"],
+        "evidenceSignalIds": ["sig-001", "sig-002", "sig-004", "sig-006", "sig-007", "sig-008"],
+        "expectedConclusion": "Atlas found a timing conflict that needs attention before tomorrow evening.",
+        "expectedResolutionId": "res-notary"
+      },
+      {
+        "id": "lisbon-memory",
+        "question": "Where was I on 11 June 2022?",
+        "requiredDimensions": ["memory"],
+        "evidenceSignalIds": ["sig-013", "sig-014"],
+        "expectedConclusion": "Likely Belem, Lisbon, Portugal with uncertainty because GPS-level location history is not connected."
+      }
+    ]
+  }
+}

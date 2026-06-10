@@ -1,0 +1,14 @@
+{
+  "servers": {
+    "MongoDB": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@mongodb-js/mongodb-mcp-server"],
+      "env": {
+        "MDB_MCP_CONNECTION_STRING": "mongodb+srv://USER:PASSWORD@CLUSTER.mongodb.net/atlas_life_intelligence",
+        "MDB_MCP_API_CLIENT_ID": "optional-atlas-api-client-id",
+        "MDB_MCP_API_CLIENT_SECRET": "optional-atlas-api-client-secret"
+      }
+    }
+  }
+}
