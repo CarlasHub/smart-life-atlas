@@ -2,8 +2,35 @@
   "name": "smart-life-atlas",
   "private": true,
   "version": "0.0.0",
+  "description": "Atlas is a Google ecosystem concept for ambient life intelligence, with a React/Vite demo and an Agent Builder + MongoDB MCP proof.",
   "license": "MIT",
+  "author": "Carla Goncalves",
   "type": "module",
+  "homepage": "https://smart-life-atlas.vercel.app",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CarlasHub/smart-life-atlas.git"
+  },
+  "bugs": {
+    "url": "https://github.com/CarlasHub/smart-life-atlas/issues"
+  },
+  "keywords": [
+    "atlas",
+    "ambient-life-intelligence",
+    "personal-intelligence",
+    "life-story-agent",
+    "google-cloud-agent-builder",
+    "gemini",
+    "mongodb-mcp",
+    "model-context-protocol",
+    "google-sign-in",
+    "synthetic-data",
+    "react",
+    "vite",
+    "sass",
+    "material-design-3",
+    "hackathon"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "vite build",

@@ -34,7 +34,7 @@ This is the kind of cross-app risk a Google-native agent should be able to find:
 - OAuth consent would authorize only the app categories and life areas the user approves.
 - Gmail, Calendar, Drive/Docs, Maps-style travel context, Photos/Memory, Health Connect, Workspace-style records, and third-party apps using Google Login would provide the signal layer.
 - Gemini would reason over approved evidence, build the daily life story, and explain why a conflict matters.
-- Google Agent Builder would coordinate next-step workflows, such as preparing a remote notary request.
+- Google Cloud Agent Builder would coordinate next-step workflows, such as preparing a remote notary request.
 - MongoDB MCP would support a future secure memory and life-signal store.
 
 The current prototype uses local synthetic data to demonstrate this architecture safely. It does not make real Google API calls.

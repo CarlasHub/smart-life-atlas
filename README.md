@@ -1,5 +1,12 @@
 # Atlas: Ambient Life Intelligence
 
+- **Live demo:** https://smart-life-atlas.vercel.app
+- **Source code:** https://github.com/CarlasHub/smart-life-atlas
+- **Hackathon track:** MongoDB partner track, with a Google Cloud Agent Builder and MongoDB MCP integration proof
+- **Status:** Static React/Vite prototype with local synthetic data. No real OAuth, APIs, backend, Gemini runtime, or personal data are used in the live app.
+
+**Keywords:** ambient life intelligence, personal intelligence companion, life story agent, Google ecosystem, Google Sign-In, Google Cloud Agent Builder, Gemini, MongoDB MCP, Model Context Protocol, synthetic data, evidence-backed reasoning, hidden conflict detection, Material Design 3, React, Vite.
+
 Atlas is a Google ecosystem concept for a personal intelligence companion. It is designed for a future where a user signs in with their Google Account, connects Google apps and third-party apps that use Google Sign-In, explicitly authorizes trusted life-area access, and lets Atlas reason across approved signals from Gmail, Google Calendar, Drive/Docs, Maps-style travel context, health records, finance records, family messages, school portals, travel apps, finance apps, and long-term memory.
 
 The submitted web app is a React/Vite static prototype. It has no backend, no real OAuth, no real APIs, and no real personal data. The Connect screen simulates Google-style consent gates with local synthetic data so judges can see how authorization, source gating, evidence, and reasoning would work before real integrations are added.
@@ -41,7 +48,7 @@ Atlas is positioned as a life intelligence layer for the Google ecosystem:
 - Photos and Memory: personal history, places, receipts, and past-day recall.
 - Health Connect or provider portals: recovery rules and medical constraints.
 - Gemini: evidence-grounded reasoning over approved signals.
-- Google Agent Builder: safe action orchestration, such as drafting a legal workaround request.
+- Google Cloud Agent Builder: safe action orchestration, such as drafting a legal workaround request.
 - MongoDB MCP: secure life-signal memory store for cross-session continuity, demonstrated in this repo with seed collections and a verifier.
 
 The current demo does not connect to these services. It shows the intended product experience using local synthetic equivalents.
@@ -54,7 +61,7 @@ Atlas is designed to make Google more central to daily life:
 - Gmail, Calendar, Drive, Docs, Maps, Photos, Tasks, and Workspace become part of a single personal intelligence loop.
 - Third-party apps have a stronger incentive to support Google Sign-In so their signals can appear in Atlas.
 - Gemini becomes the reasoning engine for everyday life, not just a chat surface.
-- Google Agent Builder becomes the safe action layer for resolving real-world conflicts.
+- Google Cloud Agent Builder becomes the safe action layer for resolving real-world conflicts.
 - Consent becomes visible and useful: the user can see exactly how each approved app improves the briefing, memory, and next-step recommendations.
 
 ## Life Story Agent Model
@@ -65,7 +72,7 @@ Atlas is not meant to be another dashboard. The agent model is:
 2. Read: Atlas reads only approved signals, with source-level evidence attached.
 3. Understand: Gemini identifies patterns, conflicts, dependencies, memories, and missing context.
 4. Narrate: Atlas creates a daily life story that is supportive, simple, and evidence-backed.
-5. Act: Google Agent Builder coordinates safe next steps only after user approval.
+5. Act: Google Cloud Agent Builder coordinates safe next steps only after user approval.
 
 The daily story is the core product. It should feel like: "Here is what is happening in your life, here is what I noticed, here is the evidence, and here is the next safe move."
 
@@ -204,4 +211,5 @@ Playwright is not installed in this prototype. Use this manual checklist after U
 - Toggle Memory off and verify Memory and the Lisbon Ask Atlas answer are gated.
 - Toggle Family off and verify "What am I forgetting?" is gated.
 - Re-enable sources and verify the Post-Op Compliance Trap and 11 June 2022 Memory answer return.
+- In Briefing, click each Agent trace node and preset question chip to verify the detail panel changes.
 - Keyboard-tab through navigation, source toggles, preset questions, evidence details, and guide buttons.
