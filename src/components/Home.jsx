@@ -3,6 +3,7 @@ import { ArrowRight, CalendarDays, FileSignature, HeartPulse, MapPin, Plane, Shi
 import { INSIGHTS } from '../data/insights';
 import { getMorningNarrative } from '../data/narrative';
 import { LIFE_DIMENSIONS } from '../data/sources';
+import { LifeStoryMode } from './LifeStoryMode';
 import { SmartAvatar } from './SmartAvatar';
 import heroImage from '../assets/atlas-immersive-hero.jpg';
 
@@ -126,6 +127,8 @@ export function Home({ activeDimensions, onNavigate, onStartJudgeMode }) {
           </div>
         </article>
       </section>
+
+      <LifeStoryMode activeDimensions={activeDimensions} onNavigate={onNavigate} />
 
       <section className="life-strip" aria-labelledby="life-areas-title">
         <div className="section-heading">

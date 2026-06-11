@@ -127,6 +127,8 @@
   .assistant-hero,
   .home-grid,
   .personal-context-strip,
+  .life-story-header,
+  .life-story-shell,
   .briefing-grid,
   .briefing-grid.secondary,
   .memory-columns,
@@ -180,6 +182,10 @@
     align-items: flex-start;
   }
 
+  .life-story-score {
+    justify-items: start;
+  }
+
   .locked-panel {
     grid-template-columns: 1fr;
   }
@@ -203,6 +209,7 @@
   .home-hero,
   .briefing-hero,
   .assistant-hero,
+  .life-story-mode,
   .agent-trace,
   .life-strip,
   .life-brief-panel,
@@ -227,7 +234,22 @@
     justify-content: center;
   }
 
+  .life-story-lenses,
+  .life-story-evidence {
+    grid-template-columns: 1fr;
+  }
+
+  .life-story-beat {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .life-story-beat-state {
+    grid-column: 2;
+    justify-self: start;
+  }
+
   .hero-actions,
+  .life-story-actions,
   .guide-footer,
   .preset-queries {
     align-items: stretch;
