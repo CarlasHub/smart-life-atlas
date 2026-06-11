@@ -1,17 +1,18 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Mic, Send, ShieldCheck, UserCircle2 } from 'lucide-react';
 import { PERSONAS, PRESET_QUERIES, getAssistantResponse } from '../data/assistant';
 import { AtlasSpark } from './AtlasSpark';
 import { SmartAvatar } from './SmartAvatar';
 
-export function AskAtlas({ activeDimensions }) {
+export function AskAtlas({ activeDimensions, demoQuery, onDemoQueryHandled }) {
   const [persona, setPersona] = useState('calm');
   const [messages, setMessages] = useState([]);
   const [isTyping, setIsTyping] = useState(false);
+  const handledDemoQueryRef = useRef(null);
   const selectedPersona = PERSONAS.find((p) => p.id === persona);
   const insightReady = ['health', 'travel', 'integrity'].every((dimension) => activeDimensions.includes(dimension));
 
-  const handleQuery = (query) => {
+  const handleQuery = useCallback((query) => {
     const userMessage = { role: 'user', text: query.text };
     setMessages((prev) => [...prev, userMessage]);
     setIsTyping(true);
@@ -21,7 +22,27 @@ export function AskAtlas({ activeDimensions }) {
       setMessages((prev) => [...prev, { role: 'assistant', text: response }]);
       setIsTyping(false);
     }, 500);
-  };
+  }, [activeDimensions, persona]);
+
+  useEffect(() => {
+    if (!demoQuery?.id || handledDemoQueryRef.current === demoQuery.requestId) return;
+
+    const query = PRESET_QUERIES.find((item) => item.id === demoQuery.id);
+    if (!query) return;
+
+    handledDemoQueryRef.current = demoQuery.requestId;
+
+    const demoQueryTimer = window.setTimeout(() => {
+      if (demoQuery.reset) {
+        setMessages([]);
+      }
+
+      handleQuery(query);
+      onDemoQueryHandled?.();
+    }, 0);
+
+    return () => window.clearTimeout(demoQueryTimer);
+  }, [demoQuery, handleQuery, onDemoQueryHandled]);
 
   return (
     <div className="main-content ask-page animate-fade-in">

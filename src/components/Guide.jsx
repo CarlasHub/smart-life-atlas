@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { CheckCircle2, ChevronRight, Cloud, Database, ShieldCheck } from 'lucide-react';
 import { SimulatedEnvironment } from './SimulatedEnvironment';
 
@@ -29,9 +28,9 @@ const PLATFORM_STATUS = [
   },
 ];
 
-export function Guide({ activeDimensions, onNavigate }) {
-  const [activeTab, setActiveTab] = useState('steps');
+export function Guide({ activeDimensions, onNavigate, activeTab = 'steps', onTabChange }) {
   const isSecurityTab = activeTab === 'security';
+  const setActiveTab = onTabChange || (() => {});
 
   return (
     <div className="main-content guide-page animate-fade-in">

@@ -33,7 +33,7 @@ const HERO_SIGNALS = [
   },
 ];
 
-export function Home({ activeDimensions, onNavigate }) {
+export function Home({ activeDimensions, onNavigate, onStartJudgeMode }) {
   const [activeSignal, setActiveSignal] = useState(HERO_SIGNALS[0]);
   const isConnected = (id) => activeDimensions.includes(id);
   const insight = INSIGHTS[0];
@@ -62,6 +62,9 @@ export function Home({ activeDimensions, onNavigate }) {
             </button>
             <button type="button" className="m3-button text" onClick={() => onNavigate('connect')}>
               Connect sources
+            </button>
+            <button type="button" className="m3-button outlined" onClick={onStartJudgeMode}>
+              Judge Mode
             </button>
           </div>
 

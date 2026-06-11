@@ -306,6 +306,7 @@ The current prototype demonstrates the first surface: a standalone web experienc
 - Memory: historical recall for 11 June 2022.
 - Ask Atlas: source-gated preset assistant answers.
 - Guide: first-time guide plus an in-page Trust & security tab for platform status and the simulated agent environment.
+- Judge Mode: guided reviewer walkthrough that uses real navigation, source state, Ask Atlas questions, and source-gated refusal.
 
 ## Rollout Plan For Google
 

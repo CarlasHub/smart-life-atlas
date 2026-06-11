@@ -88,6 +88,18 @@
     padding: var(--space-l);
   }
 
+  .judge-mode-launcher {
+    right: var(--space-m);
+    bottom: calc(5.65rem + env(safe-area-inset-bottom));
+  }
+
+  .judge-mode-panel {
+    right: var(--space-m);
+    bottom: calc(5.65rem + env(safe-area-inset-bottom));
+    width: min(32rem, calc(100vw - (var(--space-m) * 2)));
+    max-height: calc(100dvh - 7rem - env(safe-area-inset-bottom));
+  }
+
   .guide-tabs {
     width: 100%;
   }
@@ -212,6 +224,22 @@
     }
   }
 
+  .judge-mode-panel {
+    padding: var(--space-m);
+    border-radius: var(--md-sys-shape-corner-large);
+  }
+
+  .judge-mode-actions {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+
+    .m3-button {
+      min-width: 0;
+      width: 100%;
+      white-space: normal;
+    }
+  }
+
   .life-area-grid,
   .evidence-grid,
   .persona-grid,
@@ -279,6 +307,17 @@
 }
 
 @media (max-width: 420px) {
+  .judge-mode-launcher {
+    left: var(--space-m);
+    right: var(--space-m);
+    justify-content: center;
+  }
+
+  .judge-mode-header,
+  .judge-mode-actions {
+    gap: 0.5rem;
+  }
+
   .m3-nav-item .nav-label {
     font-size: 0.62rem;
   }
