@@ -28,56 +28,19 @@
   }
 
   .judge-mode-launcher {
-    position: fixed;
-    right: var(--space-m);
+    left: calc(var(--sidebar-width) + var(--space-m));
+    right: auto;
     bottom: var(--space-m);
-    z-index: 30;
-    width: auto;
     max-width: min(18rem, calc(100vw - (var(--space-m) * 2)));
-    min-height: 3rem;
-    margin-top: 0;
-    border-radius: var(--md-sys-shape-corner-full);
-    padding: 0.55rem 1rem 0.55rem 0.62rem;
-    box-shadow: var(--shadow-lift);
   }
 
   .judge-mode-panel {
-    position: fixed;
-    top: auto;
-    right: var(--space-m);
+    right: auto;
     bottom: var(--space-m);
-    left: auto;
-    z-index: 30;
-    width: min(28rem, calc(100vw - (var(--space-m) * 2)));
+    left: calc(var(--sidebar-width) + var(--space-m));
+    width: min(28rem, calc(100vw - var(--sidebar-width) - (var(--space-m) * 2)));
     max-height: calc(100dvh - (var(--space-m) * 2));
-    margin-top: 0;
     padding: var(--space-m);
-    border-radius: var(--md-sys-shape-corner-extra-large);
-    box-shadow: 0 1.25rem 3rem rgba(60, 64, 67, 0.2);
-  }
-
-  .judge-route-steps {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
-  .judge-context-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .judge-mode-actions {
-    grid-template-columns: 2.6rem minmax(0, 1fr) 2.6rem;
-
-    > .judge-icon-button,
-    > .judge-icon-button:first-child,
-    > .judge-icon-button:last-child,
-    .m3-button {
-      grid-column: auto;
-      grid-row: auto;
-    }
-
-    > .judge-icon-button {
-      width: 2.6rem;
-    }
   }
 }
 
@@ -142,12 +105,14 @@
   }
 
   .judge-mode-launcher {
-    right: var(--space-m);
+    left: var(--space-m);
+    right: auto;
     bottom: calc(5.65rem + env(safe-area-inset-bottom));
   }
 
   .judge-mode-panel {
-    right: var(--space-m);
+    left: var(--space-m);
+    right: auto;
     bottom: calc(5.65rem + env(safe-area-inset-bottom));
     width: min(32rem, calc(100vw - (var(--space-m) * 2)));
     max-height: calc(100dvh - 7rem - env(safe-area-inset-bottom));

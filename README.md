@@ -224,7 +224,7 @@ Playwright is not installed in this prototype. Use this manual checklist after U
 - Toggle Memory off and verify Memory and the Lisbon Ask Atlas answer are gated.
 - Toggle Family off and verify "What am I forgetting?" is gated.
 - Re-enable sources and verify the Post-Op Compliance Trap and 11 June 2022 Memory answer return.
-- Open Judge Mode from Home or the sidebar button and step through the full guided demo.
+- Open Judge Mode from Home or the left-side Judge Mode button and step through the full guided demo.
 - In Judge Mode, run the refusal step and verify Travel is removed from the connected areas and Ask Atlas refuses the risky-tomorrow answer.
 - In Briefing, click each Agent trace node and preset question chip to verify the detail panel changes.
 - In Guide, switch between First steps and Trust & security, then click each Simulated agent environment stage and verify the detail panel changes without network access.
