@@ -3,6 +3,7 @@ import { ArrowRight, CalendarDays, FileSignature, HeartPulse, MapPin, Plane, Shi
 import { INSIGHTS } from '../data/insights';
 import { getMorningNarrative } from '../data/narrative';
 import { LIFE_DIMENSIONS } from '../data/sources';
+import { AddToAtlasSummary } from './AddToAtlas';
 import { LifeStoryMode } from './LifeStoryMode';
 import { SmartAvatar } from './SmartAvatar';
 import heroImage from '../assets/atlas-immersive-hero.jpg';
@@ -34,7 +35,7 @@ const HERO_SIGNALS = [
   },
 ];
 
-export function Home({ activeDimensions, onNavigate }) {
+export function Home({ activeDimensions, onNavigate, atlasEntries, onOpenAddToAtlas }) {
   const [activeSignal, setActiveSignal] = useState(HERO_SIGNALS[0]);
   const isConnected = (id) => activeDimensions.includes(id);
   const insight = INSIGHTS[0];
@@ -63,6 +64,9 @@ export function Home({ activeDimensions, onNavigate }) {
             </button>
             <button type="button" className="m3-button text" onClick={() => onNavigate('connect')}>
               Connect sources
+            </button>
+            <button type="button" className="m3-button outlined" onClick={onOpenAddToAtlas}>
+              Add to Atlas
             </button>
           </div>
 
@@ -126,6 +130,8 @@ export function Home({ activeDimensions, onNavigate }) {
       </section>
 
       <LifeStoryMode activeDimensions={activeDimensions} onNavigate={onNavigate} />
+
+      <AddToAtlasSummary entries={atlasEntries} onOpen={onOpenAddToAtlas} />
 
       <section className="life-strip" aria-labelledby="life-areas-title">
         <div className="section-heading">

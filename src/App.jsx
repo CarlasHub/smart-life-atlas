@@ -7,6 +7,7 @@ import { Connect } from './components/Connect';
 import { Guide } from './components/Guide';
 import { AtlasLogo } from './components/AtlasLogo';
 import { ProductTour } from './components/ProductTour';
+import { AddToAtlas } from './components/AddToAtlas';
 import { APP_SOURCES } from './data/sources';
 import { Home, Zap, History, MessageSquare, ShieldCheck, Info } from 'lucide-react';
 import './styles/main.scss';
@@ -42,6 +43,8 @@ function App() {
   const [askDemoQuery, setAskDemoQuery] = useState(null);
   const [guideTab, setGuideTab] = useState('steps');
   const [sourceSync, setSourceSync] = useState(createInitialSourceSync);
+  const [atlasEntries, setAtlasEntries] = useState([]);
+  const [addToAtlasOpen, setAddToAtlasOpen] = useState(false);
   const mainViewportRef = useRef(null);
   const syncTimersRef = useRef([]);
 
@@ -134,6 +137,10 @@ function App() {
     syncTimersRef.current.push(timer);
   }, []);
 
+  const addAtlasEntry = useCallback((entry) => {
+    setAtlasEntries((prev) => [entry, ...prev].slice(0, 12));
+  }, []);
+
   const renderView = () => {
     switch (activeView) {
       case 'briefing':
@@ -148,7 +155,7 @@ function App() {
         return <Guide activeDimensions={activeDimensions} onNavigate={navigateTo} activeTab={guideTab} onTabChange={setGuideTab} />;
       case 'home':
       default:
-        return <HomeScreen activeDimensions={activeDimensions} onNavigate={navigateTo} />;
+        return <HomeScreen activeDimensions={activeDimensions} onNavigate={navigateTo} atlasEntries={atlasEntries} onOpenAddToAtlas={() => setAddToAtlasOpen(true)} />;
     }
   };
 
@@ -192,6 +199,12 @@ function App() {
         onDisableTravel={disableTravelForDemo}
         onAskDemoQuery={askDemoQuestion}
         onOpenGuideSecurity={openGuideSecurity}
+      />
+
+      <AddToAtlas
+        isOpen={addToAtlasOpen}
+        onClose={() => setAddToAtlasOpen(false)}
+        onAddEntry={addAtlasEntry}
       />
     </div>
   );

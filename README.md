@@ -19,6 +19,8 @@ The app also includes an automatic guided product tour with coach marks and spot
 
 Home now includes Atlas Life Story Mode, a cost-free interactive story surface that turns the same local synthetic evidence into a clickable daily narrative. Judges can move between Daily story, Risk lens, and Next step views, click each story beat, and see evidence appear only when the required life areas are connected.
 
+Home also includes an Add to Atlas control. It lets the user simulate feeding Atlas extra context as a note, document name, commitment, evidence item, or memory correction. Added signals are stored in local React state for the current browser session only. No file contents are uploaded or processed.
+
 ## Product Concept
 
 Atlas is built around a simple Google-native idea: people already live across Gmail, Calendar, Docs, Maps, Photos, health apps, finance apps, family messages, school portals, work tools, and services connected through Google Sign-In, but no trusted assistant turns those fragments into a coherent daily life story.
@@ -122,16 +124,17 @@ This is not a live Google Cloud deployment. A full deployment still requires a G
 1. Open the app with `npm run dev`.
 2. Follow the automatic guided tour for the fastest path, or close it and start manually on Home by reading: "Good morning, Carla. Here is what Atlas noticed."
 3. On Home, use Atlas Life Story Mode to switch between Daily story, Risk lens, and Next step, then click each story beat from procedure to Clause 8.1.
-4. Open Connect and treat each life-area card as a simulated Google consent scope.
-5. Review Sync status, last sync times, and the Sync now controls for approved synthetic app signals.
-6. Open Briefing to view the Post-Op Compliance Trap.
-7. Use the Agent trace to watch Atlas connect approved sources, recovery rules, deadlines, evidence, and the Clause 8.1 workaround.
-8. Inspect evidence cards for the procedure, 36-hour no-fly restriction, 19:30 flight, Friday 09:00 legal signing, Friday 12:00 legal deadline, $250,000 valuation risk, and Clause 8.1 remote notary workaround.
-9. Open Ask Atlas and ask "Why is tomorrow risky?"
-10. Use the guided tour or Connect to turn Travel off, then ask the same risky-tomorrow question again and verify the refusal message.
-11. Return Home and verify the affected Life Story Mode beats are paused until Travel is connected again.
-12. Open Memory and review the 11 June 2022 Lisbon answer with confidence, evidence, and uncertainty.
-13. Open Guide, switch to the Trust & security tab, and review the Platform status and Simulated agent environment sections for the static demo, Agent Builder proof, and backend path.
+4. Use Add to Atlas to add a note, document name, commitment, evidence item, or memory correction, then verify the new signal appears on Home.
+5. Open Connect and treat each life-area card as a simulated Google consent scope.
+6. Review Sync status, last sync times, and the Sync now controls for approved synthetic app signals.
+7. Open Briefing to view the Post-Op Compliance Trap.
+8. Use the Agent trace to watch Atlas connect approved sources, recovery rules, deadlines, evidence, and the Clause 8.1 workaround.
+9. Inspect evidence cards for the procedure, 36-hour no-fly restriction, 19:30 flight, Friday 09:00 legal signing, Friday 12:00 legal deadline, $250,000 valuation risk, and Clause 8.1 remote notary workaround.
+10. Open Ask Atlas and ask "Why is tomorrow risky?"
+11. Use the guided tour or Connect to turn Travel off, then ask the same risky-tomorrow question again and verify the refusal message.
+12. Return Home and verify the affected Life Story Mode beats are paused until Travel is connected again.
+13. Open Memory and review the 11 June 2022 Lisbon answer with confidence, evidence, and uncertainty.
+14. Open Guide, switch to the Trust & security tab, and review the Platform status and Simulated agent environment sections for the static demo, Agent Builder proof, and backend path.
 
 The demo opens with Health, Travel, Integrity, Family, and Memory enabled so the main narrative is visible immediately. Money remains off by default. Turning any required area off removes it from the reasoning path.
 
@@ -146,6 +149,7 @@ The demo opens with Health, Travel, Integrity, Family, and Memory enabled so the
 - The smart avatar shows what Atlas is watching, how much context is connected, and whether Memory is available.
 - Home includes a familiar Today / Tomorrow / Memory strip so the product feels personal before it becomes analytical.
 - Atlas Life Story Mode makes Home feel more alive by letting reviewers explore the daily story, risk lens, next step, source gates, and evidence without leaving the landing experience.
+- Add to Atlas makes the prototype feel more personal by letting the user add a session-only note, document name, commitment, evidence item, or memory correction.
 - Automatic guided tour gives reviewers a compact coach-mark path through the strongest product story and source-gating proof, with spotlight highlights.
 - Connect includes simulated sync status, last sync times, and manual Sync now controls so users can see when approved synthetic app signals were checked.
 - Home uses a generated immersive lifestyle/productivity hero image stored in `src/assets`.
@@ -199,6 +203,8 @@ If a required life area is off, Ask Atlas returns: "I cannot answer that because
 
 This matters for the hackathon story: Atlas is not just a UI mockup. The source gates affect the deterministic reasoning path. Turning a source off removes it from the briefing, memory retrieval, and assistant answers.
 
+The Add to Atlas control adds extra user-provided synthetic signals only to the current browser session. Selecting a file stores the file name for display only. The prototype does not upload, parse, or retain file contents.
+
 The `agent/mongodb/seed-data.json` file mirrors the same story as MongoDB collections so the future Gemini and Agent Builder version can query life signals, evidence, resolution paths, and memory through MongoDB MCP.
 
 ## Future Platform Plan
@@ -231,6 +237,9 @@ Playwright is not installed in this prototype. Use this manual checklist after U
 - Toggle Health, Travel, and Integrity off one at a time and verify Briefing becomes gated.
 - In Connect, click Sync now and verify approved app sources temporarily show syncing, then update last sync time.
 - In Connect, verify disconnected app sources show Not connected and have disabled sync controls.
+- On Home, open Add to Atlas, add a note, and verify it appears in the Tell Atlas summary.
+- On Home, open Add to Atlas, select a file, and verify the UI states that only the file name is stored and no upload occurs.
+- On Home, open Add to Atlas, press Escape and verify the dialog closes without adding a signal.
 - Toggle Memory off and verify Memory and the Lisbon Ask Atlas answer are gated.
 - Toggle Family off and verify "What am I forgetting?" is gated.
 - Re-enable sources and verify the Post-Op Compliance Trap and 11 June 2022 Memory answer return.

@@ -115,6 +115,8 @@
   .assistant-hero,
   .home-grid,
   .personal-context-strip,
+  .add-atlas-summary-header,
+  .user-signal-list,
   .sync-console,
   .life-story-header,
   .life-story-shell,
@@ -202,6 +204,7 @@
   .home-hero,
   .briefing-hero,
   .assistant-hero,
+  .add-atlas-summary,
   .life-story-mode,
   .agent-trace,
   .life-strip,
@@ -229,6 +232,8 @@
   }
 
   .life-story-lenses,
+  .add-atlas-type-grid,
+  .add-atlas-field-grid,
   .life-story-evidence {
     grid-template-columns: 1fr;
   }
@@ -243,6 +248,9 @@
   }
 
   .hero-actions,
+  .add-atlas-dialog-header,
+  .add-atlas-summary-header,
+  .add-atlas-actions,
   .sync-console-actions,
   .life-story-actions,
   .guide-footer,
