@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ChevronLeft, ChevronRight, Sparkles, X } from 'lucide-react';
 import { AtlasSpark } from './AtlasSpark';
 
@@ -10,9 +10,81 @@ const STEPS = [
     title: 'Start with the morning story.',
     body: 'Atlas opens like a personal intelligence companion: one clear life narrative, one important insight, and simple next actions.',
     lookFor: 'A human product experience, not a dashboard.',
-    actionLabel: 'Next: Consent',
+    actionLabel: 'Next: Avatar',
     view: 'home',
-    targetSelector: '.hero-actions',
+    targetSelector: '.home-hero',
+    restoreSources: true,
+  },
+  {
+    id: 'avatar',
+    shortLabel: 'Avatar',
+    eyebrow: 'Assistant presence',
+    title: 'The smart avatar makes Atlas feel alive.',
+    body: 'The orb is an abstract assistant presence. It shows connected context, active reasoning, and whether the important insight is ready.',
+    lookFor: 'A familiar assistant signal without using a realistic face.',
+    actionLabel: 'Next: Context',
+    view: 'home',
+    targetSelector: '.immersive-panel',
+    restoreSources: true,
+  },
+  {
+    id: 'context',
+    shortLabel: 'Today',
+    eyebrow: 'Personal context',
+    title: 'Today, tomorrow, and memory stay visible.',
+    body: 'Atlas gives the user familiar anchors before asking them to inspect deeper reasoning.',
+    lookFor: 'Procedure, signing, and Lisbon memory are introduced in plain language.',
+    actionLabel: 'Next: Story',
+    view: 'home',
+    targetSelector: '.personal-context-strip',
+    restoreSources: true,
+  },
+  {
+    id: 'life-story',
+    shortLabel: 'Story',
+    eyebrow: 'Life Story Mode',
+    title: 'The daily story is interactive.',
+    body: 'Reviewers can switch lenses and click each story beat to see how approved signals become a narrative.',
+    lookFor: 'Daily story, risk lens, next step, evidence labels, and source gates.',
+    actionLabel: 'Next: Add data',
+    view: 'home',
+    targetSelector: '.life-story-mode',
+    restoreSources: true,
+  },
+  {
+    id: 'add-data',
+    shortLabel: 'Add',
+    eyebrow: 'User-fed context',
+    title: 'Users can add what apps may miss.',
+    body: 'Add to Atlas simulates user-approved notes, document names, commitments, evidence, and memory corrections without uploading files.',
+    lookFor: 'The prototype stores added signals only for the current browser session.',
+    actionLabel: 'Next: Insight',
+    view: 'home',
+    targetSelector: '.add-atlas-summary',
+    restoreSources: true,
+  },
+  {
+    id: 'home-insight',
+    shortLabel: 'Insight',
+    eyebrow: 'Important insight',
+    title: 'The strongest risk is visible from Home.',
+    body: 'Atlas gives one primary finding and a clear path into the evidence instead of burying the user in a dashboard.',
+    lookFor: 'Confidence, source gating, and the evidence entry point.',
+    actionLabel: 'Next: Sync',
+    view: 'home',
+    targetSelector: '.insight-feature',
+    restoreSources: true,
+  },
+  {
+    id: 'sync',
+    shortLabel: 'Sync',
+    eyebrow: 'Signal freshness',
+    title: 'Users can see when sources were checked.',
+    body: 'The sync panel answers a basic trust question: what has Atlas read, and when did it last check approved app signals?',
+    lookFor: 'Last sync time, approved signal count, and Sync now.',
+    actionLabel: 'Next: Consent',
+    view: 'connect',
+    targetSelector: '.sync-console',
     restoreSources: true,
   },
   {
@@ -22,9 +94,45 @@ const STEPS = [
     title: 'Life areas control the reasoning.',
     body: 'The Connect page shows plain-language permission areas before app-level detail. Turning a life area off changes what Atlas can answer.',
     lookFor: 'Life areas come before app-level details.',
-    actionLabel: 'Next: Conflict',
+    actionLabel: 'Next: Apps',
     view: 'connect',
     targetSelector: '.life-area-grid .dimension-card',
+    restoreSources: true,
+  },
+  {
+    id: 'apps',
+    shortLabel: 'Apps',
+    eyebrow: 'App-level detail',
+    title: 'App sources stay compact and understandable.',
+    body: 'Atlas shows the synthetic app layer underneath life areas so users can understand where signals come from without reading a settings table.',
+    lookFor: 'Google-style app examples, status labels, and per-source sync controls.',
+    actionLabel: 'Next: Brief',
+    view: 'connect',
+    targetSelector: '.app-source-grid .app-item',
+    restoreSources: true,
+  },
+  {
+    id: 'life-brief',
+    shortLabel: 'Brief',
+    eyebrow: 'Life Brief',
+    title: 'The briefing starts supportive, not alarming.',
+    body: 'Atlas frames the situation as a timing conflict that needs attention before tomorrow evening.',
+    lookFor: 'Plain-language summary before the detailed evidence.',
+    actionLabel: 'Next: Trace',
+    view: 'briefing',
+    targetSelector: '.life-brief-panel',
+    restoreSources: true,
+  },
+  {
+    id: 'trace',
+    shortLabel: 'Trace',
+    eyebrow: 'Agent reasoning',
+    title: 'The reasoning path is visible.',
+    body: 'The trace shows how the agent connects approved sources, recovery rules, travel, legal deadlines, and the workaround.',
+    lookFor: 'A reviewer can inspect each reasoning stage instead of trusting a black box.',
+    actionLabel: 'Next: Conflict',
+    view: 'briefing',
+    targetSelector: '.agent-trace',
     restoreSources: true,
   },
   {
@@ -46,9 +154,33 @@ const STEPS = [
     title: 'Every claim has a source.',
     body: 'The evidence section lets a reviewer inspect the signals behind the timing conflict and Clause 8.1 remote notary path.',
     lookFor: 'The trace, evidence cards, and Clause 8.1 workaround.',
-    actionLabel: 'Next: Ask',
+    actionLabel: 'Next: Resolution',
     view: 'briefing',
     targetSelector: '.evidence-grid .evidence-card',
+    restoreSources: true,
+  },
+  {
+    id: 'resolution',
+    shortLabel: 'Resolve',
+    eyebrow: 'Resolution path',
+    title: 'Atlas suggests a safer route.',
+    body: 'The briefing points to Clause 8.1 as a remote notary workaround, keeping the medical restriction and deadline visible together.',
+    lookFor: 'A next step is shown with its evidence and impact.',
+    actionLabel: 'Next: Persona',
+    view: 'briefing',
+    targetSelector: '.resolution-path',
+    restoreSources: true,
+  },
+  {
+    id: 'persona',
+    shortLabel: 'Persona',
+    eyebrow: 'Assistant tone',
+    title: 'The user chooses how Atlas speaks.',
+    body: 'Persona choices make the assistant feel more personal while keeping the same source-gated reasoning underneath.',
+    lookFor: 'Calm Guide, Executive Assistant, Warm Coach, and Direct Analyst.',
+    actionLabel: 'Next: Ask',
+    view: 'ask',
+    targetSelector: '.persona-selection',
     restoreSources: true,
   },
   {
@@ -79,6 +211,30 @@ const STEPS = [
     queryId: 'risky',
   },
   {
+    id: 'memory',
+    shortLabel: 'Memory',
+    eyebrow: 'Memory recall',
+    title: 'Atlas can explain a remembered day.',
+    body: 'The Memory page reconstructs 11 June 2022 with a likely location, confidence, evidence, timeline, and uncertainty note.',
+    lookFor: 'The Lisbon answer is helpful but does not claim perfect certainty.',
+    actionLabel: 'Next: Guide',
+    view: 'memory',
+    targetSelector: '.memory-answer',
+    restoreSources: true,
+  },
+  {
+    id: 'guide',
+    shortLabel: 'Guide',
+    eyebrow: 'First-time path',
+    title: 'The guide keeps onboarding simple.',
+    body: 'The first-time guide shows the workflow as six clear steps so users with cognitive load concerns can follow the product.',
+    lookFor: 'Choose areas, read brief, review conflicts, inspect evidence, ask, resolve.',
+    actionLabel: 'Next: Trust',
+    view: 'guide',
+    targetSelector: '.guide-steps .step-card',
+    restoreSources: true,
+  },
+  {
     id: 'security',
     shortLabel: 'Trust',
     eyebrow: 'Trust model',
@@ -92,6 +248,19 @@ const STEPS = [
     restoreSources: true,
   },
   {
+    id: 'simulated-agent',
+    shortLabel: 'Agent',
+    eyebrow: 'Simulated agent environment',
+    title: 'The future cloud path is demonstrated safely.',
+    body: 'The Guide page shows the planned Google Sign-In, MongoDB MCP, Agent Builder, and Gemini flow without making cloud calls.',
+    lookFor: 'The static demo makes the agent architecture visible without backend cost.',
+    actionLabel: 'Next: Finish',
+    view: 'guide',
+    guideTab: 'security',
+    targetSelector: '.sim-env-workbench',
+    restoreSources: true,
+  },
+  {
     id: 'finish',
     shortLabel: 'Ready',
     eyebrow: 'You are ready',
@@ -100,7 +269,7 @@ const STEPS = [
     lookFor: 'A complete concept, not only isolated screens.',
     actionLabel: 'Finish tour',
     view: 'home',
-    targetSelector: '.insight-main',
+    targetSelector: '.home-hero',
     restoreSources: true,
   },
 ];
@@ -128,6 +297,7 @@ export function ProductTour({
   const progress = ((stepIndex + 1) / STEPS.length) * 100;
   const [spotlight, setSpotlight] = useState(DEFAULT_SPOTLIGHT);
   const [cardPosition, setCardPosition] = useState({ top: 112, left: 704 });
+  const cardRef = useRef(null);
 
   useEffect(() => {
     if (!isOpen) {
@@ -138,8 +308,12 @@ export function ProductTour({
     let scrollTimer;
     let measureTimer;
 
+    const getTarget = () => document.querySelector(step.targetSelector) || document.querySelector('.main-content') || document.querySelector('.main-viewport');
+
+    const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+
     const measure = () => {
-      const target = document.querySelector(step.targetSelector) || document.querySelector('.main-content') || document.querySelector('.main-viewport');
+      const target = getTarget();
 
       if (!target) {
         setSpotlight(DEFAULT_SPOTLIGHT);
@@ -149,28 +323,33 @@ export function ProductTour({
 
       const rect = target.getBoundingClientRect();
       const pad = window.innerWidth <= 640 ? 6 : 10;
+      const viewportMargin = window.innerWidth <= 860 ? 12 : 16;
+      const reservedBottom = window.innerWidth <= 860 ? 112 : 84;
       const nextSpotlight = {
-        top: Math.max(8, rect.top - pad),
-        left: Math.max(8, rect.left - pad),
+        top: clamp(rect.top - pad, 8, window.innerHeight - 24),
+        left: clamp(rect.left - pad, 8, window.innerWidth - 24),
         width: Math.min(window.innerWidth - 16, rect.width + pad * 2),
         height: Math.min(window.innerHeight - 16, rect.height + pad * 2),
       };
 
-      const cardWidth = Math.min(360, window.innerWidth - 32);
-      const cardHeight = 250;
+      const cardWidth = Math.min(376, window.innerWidth - viewportMargin * 2);
+      const measuredHeight = cardRef.current?.offsetHeight || 360;
+      const cardHeight = Math.min(measuredHeight, window.innerHeight - reservedBottom - viewportMargin);
+      const maxLeft = window.innerWidth - cardWidth - viewportMargin;
+      const maxTop = window.innerHeight - cardHeight - reservedBottom;
       let left = rect.right + 18;
-      let top = Math.max(16, rect.top + 16);
+      let top = rect.top + 12;
 
-      if (left + cardWidth > window.innerWidth - 16) {
+      if (left + cardWidth > window.innerWidth - viewportMargin) {
         left = rect.left - cardWidth - 18;
       }
 
-      if (left < 16) {
-        left = Math.min(window.innerWidth - cardWidth - 16, rect.left + 16);
-      }
-
-      if (top + cardHeight > window.innerHeight - 16) {
-        top = Math.max(16, window.innerHeight - cardHeight - 16);
+      if (window.innerWidth <= 860) {
+        left = viewportMargin;
+        top = Math.max(viewportMargin, window.innerHeight - cardHeight - reservedBottom);
+      } else {
+        left = clamp(left, viewportMargin, Math.max(viewportMargin, maxLeft));
+        top = clamp(top, viewportMargin, Math.max(viewportMargin, maxTop));
       }
 
       setSpotlight(nextSpotlight);
@@ -178,7 +357,7 @@ export function ProductTour({
     };
 
     const scrollTargetIntoView = () => {
-      const target = document.querySelector(step.targetSelector);
+      const target = getTarget();
 
       if (target) {
         target.scrollIntoView({
@@ -192,12 +371,14 @@ export function ProductTour({
     };
 
     scrollTimer = window.setTimeout(scrollTargetIntoView, 80);
+    const lateMeasureTimer = window.setTimeout(measure, 480);
     window.addEventListener('resize', measure);
     mainViewport?.addEventListener('scroll', measure, { passive: true });
 
     return () => {
       window.clearTimeout(scrollTimer);
       window.clearTimeout(measureTimer);
+      window.clearTimeout(lateMeasureTimer);
       window.removeEventListener('resize', measure);
       mainViewport?.removeEventListener('scroll', measure);
     };
@@ -261,6 +442,7 @@ export function ProductTour({
       />
 
       <aside
+        ref={cardRef}
         className="product-tour-card"
         style={{
           '--tour-card-top': `${cardPosition.top}px`,
@@ -289,6 +471,7 @@ export function ProductTour({
           <span className="tour-step-count">Step {stepIndex + 1} of {STEPS.length}</span>
           <h3 className="text-title-large">{step.title}</h3>
           <p className="text-body-medium">{step.body}</p>
+          <p className="tour-look-for"><strong>What to notice:</strong> {step.lookFor}</p>
         </div>
 
         <footer className="product-tour-actions">

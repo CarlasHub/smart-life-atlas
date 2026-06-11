@@ -15,7 +15,7 @@ The repository also includes a clean Agent Builder and MongoDB MCP integration p
 
 The Guide page includes a simulated agent environment that shows this planned architecture in the browser: simulated Google Sign-In consent, MongoDB MCP-style reads, Agent Builder and Gemini-style reasoning, and evidence-backed local output. It is explicitly frontend-only and makes no cloud calls.
 
-The app also includes an automatic guided product tour with coach marks and spotlight highlights. It starts when the app loads and takes reviewers through the strongest demo path: Home, Connect, Briefing, evidence, Ask Atlas, source-gated refusal, and Trust & security without covering the whole interface.
+The app also includes an automatic guided product tour with coach marks and spotlight highlights. It starts when the app loads and takes reviewers through the major product surfaces: Home, smart avatar, personal context, Life Story Mode, Add to Atlas, sync status, Connect, app sources, Briefing, agent trace, evidence, resolution, Ask Atlas, source-gated refusal, Memory, Guide, Trust & security, and the simulated agent environment.
 
 Home now includes Atlas Life Story Mode, a cost-free interactive story surface that turns the same local synthetic evidence into a clickable daily narrative. Judges can move between Daily story, Risk lens, and Next step views, click each story beat, and see evidence appear only when the required life areas are connected.
 
@@ -150,7 +150,7 @@ The demo opens with Health, Travel, Integrity, Family, and Memory enabled so the
 - Home includes a familiar Today / Tomorrow / Memory strip so the product feels personal before it becomes analytical.
 - Atlas Life Story Mode makes Home feel more alive by letting reviewers explore the daily story, risk lens, next step, source gates, and evidence without leaving the landing experience.
 - Add to Atlas makes the prototype feel more personal by letting the user add a session-only note, document name, commitment, evidence item, or memory correction.
-- Automatic guided tour gives reviewers a compact coach-mark path through the strongest product story and source-gating proof, with spotlight highlights.
+- Automatic guided tour gives reviewers a coach-mark path through the strongest product story and source-gating proof, with spotlight highlights and controls that remain visible while the explanatory copy scrolls inside the card.
 - Connect includes simulated sync status, last sync times, and manual Sync now controls so users can see when approved synthetic app signals were checked.
 - Home uses a generated immersive lifestyle/productivity hero image stored in `src/assets`.
 - Atlas has a repo-native SVG logo and favicon; it does not copy Google branding.
@@ -243,7 +243,8 @@ Playwright is not installed in this prototype. Use this manual checklist after U
 - Toggle Memory off and verify Memory and the Lisbon Ask Atlas answer are gated.
 - Toggle Family off and verify "What am I forgetting?" is gated.
 - Re-enable sources and verify the Post-Op Compliance Trap and 11 June 2022 Memory answer return.
-- Reload the app and step through the automatic guided tour.
+- Reload the app and step through the automatic guided tour from start to finish.
+- During the guided tour, verify the highlighted section scrolls into view and the Previous, primary Next, and icon Next controls remain visible at every step.
 - In the guided tour, run the refusal step and verify Travel is removed from the connected areas and Ask Atlas refuses the risky-tomorrow answer.
 - On Home, switch every Atlas Life Story Mode lens and click every story beat.
 - Turn Travel off, return Home, and verify the flight and signing story beats explain which source is missing.
