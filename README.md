@@ -1,6 +1,7 @@
 # Atlas: Ambient Life Intelligence
 
 - **Live demo:** https://smart-life-atlas.vercel.app
+- **Demo video:** https://smart-life-atlas.vercel.app/smart-life-atlas.mp4
 - **Source code:** https://github.com/CarlasHub/smart-life-atlas
 - **Hackathon track:** MongoDB partner track, with a Google Cloud Agent Builder and MongoDB MCP integration proof
 - **Status:** React/Vite prototype with local synthetic product data and a locked-down Vercel proof endpoint. No real OAuth, Gmail, Calendar, Drive, health, finance, legal, travel, or personal data are used.
@@ -16,6 +17,8 @@ The repository also includes a clean Agent Builder and MongoDB MCP integration p
 The Guide page includes a capped live proof panel plus a simulated agent environment. The live proof panel calls the server-side Vercel route only when secrets are configured; the surrounding product UI remains local and synthetic.
 
 The app also includes an automatic guided product tour with coach marks and spotlight highlights. It starts when the app loads and takes reviewers through the major product surfaces: Home, smart avatar, personal context, Life Story Mode, Add to Atlas, sync status, Connect, app sources, Briefing, agent trace, evidence, resolution, Ask Atlas, source-gated refusal, Memory, Guide, Trust & security, and the simulated agent environment.
+
+The submitted demo video is stored as `public/smart-life-atlas.mp4` and is served from the live demo at https://smart-life-atlas.vercel.app/smart-life-atlas.mp4.
 
 Home now includes Atlas Life Story Mode, a cost-free interactive story surface that turns the same local synthetic evidence into a clickable daily narrative. Judges can move between Daily story, Risk lens, and Next step views, click each story beat, and see evidence appear only when the required life areas are connected.
 

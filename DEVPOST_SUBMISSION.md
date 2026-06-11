@@ -16,6 +16,14 @@ The main demo is the Post-Op Compliance Trap: Atlas detects that a procedure at 
 
 This is the kind of cross-app risk a Google-native agent should be able to find: the medical instruction may live in a document or portal, the flight in Gmail/travel data, the signing in Calendar, the legal deadline in Docs, and the resolution path in a contract clause.
 
+## Demo Video
+
+The current demo video is `public/smart-life-atlas.mp4` in the repository and is served from:
+
+https://smart-life-atlas.vercel.app/smart-life-atlas.mp4
+
+Devpost's embedded video field only accepts YouTube, Facebook Video, Vimeo, or Youku URLs, so the public Devpost story also includes the direct MP4 link until the new video is uploaded to a supported video host.
+
 ## What It Does
 
 - Builds a calm daily life brief from connected Google-style life sources.
