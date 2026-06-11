@@ -3,17 +3,17 @@
 - **Live demo:** https://smart-life-atlas.vercel.app
 - **Source code:** https://github.com/CarlasHub/smart-life-atlas
 - **Hackathon track:** MongoDB partner track, with a Google Cloud Agent Builder and MongoDB MCP integration proof
-- **Status:** Static React/Vite prototype with local synthetic data. No real OAuth, APIs, backend, Gemini runtime, or personal data are used in the live app.
+- **Status:** React/Vite prototype with local synthetic product data and a locked-down Vercel proof endpoint. No real OAuth, Gmail, Calendar, Drive, health, finance, legal, travel, or personal data are used.
 
 **Keywords:** ambient life intelligence, personal intelligence companion, life story agent, Google ecosystem, Google Sign-In, Google Cloud Agent Builder, Gemini, MongoDB MCP, Model Context Protocol, synthetic data, evidence-backed reasoning, hidden conflict detection, Material Design 3, React, Vite.
 
 Atlas is a Google ecosystem concept for a personal intelligence companion. It is designed for a future where a user signs in with their Google Account, connects Google apps and third-party apps that use Google Sign-In, explicitly authorizes trusted life-area access, and lets Atlas reason across approved signals from Gmail, Google Calendar, Drive/Docs, Maps-style travel context, health records, finance records, family messages, school portals, travel apps, finance apps, and long-term memory.
 
-The submitted web app is a React/Vite static prototype. It has no backend, no real OAuth, no real APIs, and no real personal data. The Connect screen simulates Google-style consent gates with local synthetic data so judges can see how authorization, source gating, evidence, and reasoning would work before real integrations are added.
+The submitted web app is a React/Vite prototype with local synthetic product data and one capped Vercel proof endpoint. It has no real OAuth, no real Gmail/Calendar/Drive/personal APIs, and no real personal data. The Connect screen simulates Google-style consent gates with local synthetic data so judges can see how authorization, source gating, evidence, and reasoning would work before real integrations are added.
 
-The repository also includes a clean Agent Builder and MongoDB MCP integration proof under `agent/`. It provides Agent Builder instructions, MongoDB-shaped seed collections, an MCP server configuration example using `@mongodb-js/mongodb-mcp-server`, and a local verifier script that proves the same source-gated reasoning contract without requiring cloud credentials.
+The repository also includes a clean Agent Builder and MongoDB MCP integration proof under `agent/`. It provides Agent Builder instructions, a Google ADK agent artifact, MongoDB-shaped seed collections, an MCP server configuration example using `mongodb-mcp-server`, and local verifier scripts that prove the same source-gated reasoning contract without requiring public cloud deployment.
 
-The Guide page includes a simulated agent environment that shows this planned architecture in the browser: simulated Google Sign-In consent, MongoDB MCP-style reads, Agent Builder and Gemini-style reasoning, and evidence-backed local output. It is explicitly frontend-only and makes no cloud calls.
+The Guide page includes a capped live proof panel plus a simulated agent environment. The live proof panel calls the server-side Vercel route only when secrets are configured; the surrounding product UI remains local and synthetic.
 
 The app also includes an automatic guided product tour with coach marks and spotlight highlights. It starts when the app loads and takes reviewers through the major product surfaces: Home, smart avatar, personal context, Life Story Mode, Add to Atlas, sync status, Connect, app sources, Briefing, agent trace, evidence, resolution, Ask Atlas, source-gated refusal, Memory, Guide, Trust & security, and the simulated agent environment.
 
@@ -59,7 +59,7 @@ Atlas is positioned as a life intelligence layer for the Google ecosystem:
 - Google Cloud Agent Builder: safe action orchestration, such as drafting a legal workaround request.
 - MongoDB MCP: secure life-signal memory store for cross-session continuity, demonstrated in this repo with seed collections and a verifier.
 
-The current demo does not connect to these services. It shows the intended product experience using local synthetic equivalents.
+The current product demo does not connect to these services. It shows the intended product experience using local synthetic equivalents. A separate capped proof route can call Gemini and MongoDB MCP when server-side secrets are configured.
 
 ## Strategic Value For Google
 
@@ -89,9 +89,12 @@ The daily story is the core product. It should feel like: "Here is what is happe
 The `agent/` folder turns the static prototype into a judge-readable technical plan for the required agent architecture:
 
 - `agent/atlas-agent.md`: instructions for an Atlas Life Story Agent in Google Cloud Agent Builder.
+- `agent/google-adk/atlas-agent.mjs`: Google ADK `LlmAgent` artifact configured for Gemini 3 and MongoDB MCP.
 - `agent/mongodb/seed-data.json`: synthetic MongoDB collections for life areas, life signals, evidence, resolution paths, memory events, and deterministic agent tests.
-- `agent/mongodb/mcp-server.example.json`: MCP server configuration for the official `@mongodb-js/mongodb-mcp-server` package.
+- `agent/mongodb/mcp-server.example.json`: MCP server configuration for the official `mongodb-mcp-server` package.
 - `scripts/agent-proof.mjs`: local proof that reconstructs the Post-Op Compliance Trap from MongoDB-shaped evidence IDs and enforces source-gated refusal.
+- `scripts/live-agent-proof.mjs`: budget-guarded live Gemini proof through Google Agent Platform / Vertex AI using the same preset, MongoDB-shaped tool trace.
+- `scripts/agent-builder-mongodb-mcp.mjs`: local functional agent proof that starts MongoDB, seeds synthetic data, calls the real MongoDB MCP server, creates the Google ADK agent, and optionally sends the MCP trace to Gemini.
 
 Run the proof:
 
@@ -111,12 +114,73 @@ Run the memory check:
 node scripts/agent-proof.mjs --query=memory
 ```
 
-This is not a live Google Cloud deployment. A full deployment still requires a Google Cloud project, Google Cloud Agent Builder configuration, a MongoDB Atlas database, and credentials that are not committed to this repo.
+Run the live Gemini proof without making a model call:
+
+```bash
+npm run agent:live:dry
+```
+
+Run one live Gemini proof call through the dedicated Google Cloud project:
+
+```bash
+npm run agent:live -- --query=post-op
+```
+
+Run the functional Agent Builder + MongoDB MCP proof without a Gemini call:
+
+```bash
+npm run agent:builder:mcp:dry
+```
+
+Run the functional Agent Builder + MongoDB MCP proof with Gemini:
+
+```bash
+npm run agent:builder:mcp -- --query=post-op
+```
+
+Seed a MongoDB Atlas database for the hosted MCP endpoint:
+
+```bash
+ATLAS_SEED_MONGODB_CONFIRM=replace-demo-data npm run agent:seed:mongodb
+```
+
+The hosted Vercel app includes a capped live proof panel in Guide -> Trust & security. It calls `/api/live-agent-proof?query=post-op`, which only runs when server-side Vercel environment variables are configured:
+
+- `ATLAS_LIVE_AGENT_ENABLED=true`
+- `MDB_MCP_CONNECTION_STRING`
+- `GOOGLE_SERVICE_ACCOUNT_JSON` or `GOOGLE_SERVICE_ACCOUNT_JSON_BASE64`
+- `ATLAS_USAGE_EMAIL_RESEND_API_KEY`
+- `ATLAS_USAGE_EMAIL_TO`
+- `ATLAS_USAGE_EMAIL_FROM`
+- optional: `ATLAS_LIVE_AGENT_DAILY_LIMIT`, default `1`
+- optional: `ATLAS_AGENT_PROJECT`, `ATLAS_AGENT_LOCATION`, `ATLAS_AGENT_MODEL`, `ATLAS_AGENT_MAX_OUTPUT_TOKENS`
+- optional: `ATLAS_USAGE_EMAIL_REPLY_TO`
+- optional: `ATLAS_LIVE_AGENT_DISABLE_AFTER_UTC`, default `2026-07-16T07:00:00Z`
+
+The live script is intentionally locked down:
+
+- only preset queries are allowed: `post-op`, `memory`, and `refusal`
+- the hosted endpoint only accepts the fixed `post-op` query
+- arbitrary query parameters and custom prompts are blocked
+- a local usage counter limits live calls to 3 per UTC day by default
+- the hosted endpoint defaults to 1 live generation per UTC day per warm serverless instance and caches successful responses at the Vercel edge
+- the hosted endpoint sends a Resend email before every non-cached live generation attempt, and blocks the live call if the email cannot be sent
+- the hosted endpoint shuts off automatically with `ATLAS_LIVE_AGENT_DISABLE_AFTER_UTC`; the default cutoff is `2026-07-16T07:00:00Z`, two days after the July 13 winner announcement window
+- Agent Builder MCP override knobs are environment variables: `ATLAS_AGENT_PROJECT`, `ATLAS_AGENT_LOCATION`, `ATLAS_AGENT_MODEL`, `ATLAS_AGENT_BUILDER_DAILY_LIMIT`, and `ATLAS_AGENT_MAX_OUTPUT_TOKENS`
+- the separate minimal live Gemini proof uses `ATLAS_LIVE_AGENT_DAILY_LIMIT`
+- the dedicated Google Cloud project is `atlas-agent-20260611`
+- the project has a GBP 1 monthly budget alert scoped to that project
+
+This is not a live hosted Google Cloud Agent Builder console deployment. The hosted Vercel endpoint is a capped proof route that starts the official MongoDB MCP server, reads seeded MongoDB Atlas demo data, and calls Gemini from server-side credentials.
+
+The local functional Agent Builder MCP proof still uses local MongoDB by default. The hosted proof requires a MongoDB Atlas connection string that is intentionally not committed to this repo.
 
 ## Technical Docs
 
-- [Architecture](docs/ARCHITECTURE.md): current static demo, future agent architecture, source-gated flow, and UI surfaces.
+- [Architecture](docs/ARCHITECTURE.md): current product demo, capped proof endpoint, future agent architecture, source-gated flow, and UI surfaces.
 - [Data Schema](docs/DATA_SCHEMA.md): MongoDB-shaped collections, field definitions, validation rules, and example queries.
+- [Agent Builder MCP Proof](docs/AGENT_BUILDER_MCP_PROOF.md): Google ADK agent, local MongoDB, real MongoDB MCP server, and Gemini proof commands.
+- [Live Agent Proof](docs/LIVE_AGENT_PROOF.md): Google Cloud project, budget guardrail, preset-only live Gemini proof, and limitations.
 - [Safety And Constraints](docs/SAFETY_AND_CONSTRAINTS.md): source-gating rules, privacy constraints, action limits, cost controls, and safety tests.
 
 ## Demo Flow
@@ -134,7 +198,7 @@ This is not a live Google Cloud deployment. A full deployment still requires a G
 11. Use the guided tour or Connect to turn Travel off, then ask the same risky-tomorrow question again and verify the refusal message.
 12. Return Home and verify the affected Life Story Mode beats are paused until Travel is connected again.
 13. Open Memory and review the 11 June 2022 Lisbon answer with confidence, evidence, and uncertainty.
-14. Open Guide, switch to the Trust & security tab, and review the Platform status and Simulated agent environment sections for the static demo, Agent Builder proof, and backend path.
+14. Open Guide, switch to the Trust & security tab, and review the Platform status, Live capped proof, and Simulated agent environment sections.
 
 The demo opens with Health, Travel, Integrity, Family, and Memory enabled so the main narrative is visible immediately. Money remains off by default. Turning any required area off removes it from the reasoning path.
 
@@ -222,6 +286,8 @@ The `agent/mongodb/seed-data.json` file mirrors the same story as MongoDB collec
 npm install
 npm run dev
 npm run agent:proof
+npm run agent:live:dry
+npm run agent:builder:mcp:dry
 npm run build
 npm run lint
 ```

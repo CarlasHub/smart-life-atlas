@@ -3,9 +3,11 @@
     "MongoDB": {
       "type": "stdio",
       "command": "npx",
-      "args": ["-y", "@mongodb-js/mongodb-mcp-server"],
+      "args": ["-y", "mongodb-mcp-server@latest", "--readOnly"],
       "env": {
         "MDB_MCP_CONNECTION_STRING": "mongodb+srv://USER:PASSWORD@CLUSTER.mongodb.net/atlas_life_intelligence",
+        "MDB_MCP_READ_ONLY": "true",
+        "MDB_MCP_TELEMETRY": "disabled",
         "MDB_MCP_API_CLIENT_ID": "optional-atlas-api-client-id",
         "MDB_MCP_API_CLIENT_SECRET": "optional-atlas-api-client-secret"
       }

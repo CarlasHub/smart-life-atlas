@@ -7,9 +7,9 @@ This document has two jobs:
 1. Describe what the current submitted demo actually does.
 2. Show the future architecture Google could use to implement Atlas across Google users, Google apps, and third-party apps connected through Google Sign-In.
 
-The live app is static React/Vite with local synthetic data. It does not call Google Cloud, Gemini, MongoDB, OAuth, Gmail, Calendar, Drive, or third-party APIs.
+The live app is React/Vite with local synthetic product data and a capped Vercel proof endpoint. The product UI does not call real OAuth, Gmail, Calendar, Drive, health, finance, travel, legal, or personal APIs. The Guide -> Trust & security live proof panel can call Google Cloud Gemini and MongoDB MCP only when server-side Vercel secrets are configured.
 
-The repo also includes a credential-ready proof path for a future Google Cloud Agent Builder and MongoDB MCP implementation.
+The repo also includes a credential-ready proof path for a future Google Cloud Agent Builder and MongoDB MCP implementation, a Google ADK agent artifact, a local functional MongoDB MCP proof, and a minimal CLI live Gemini proof through Google Agent Platform / Vertex AI.
 
 ## Product Architecture Goal
 
@@ -47,9 +47,11 @@ Current behavior:
 - Briefing uses local insight and evidence data.
 - Ask Atlas answers deterministic preset questions.
 - If required life areas are disabled, Ask Atlas refuses with: `I cannot answer that because the required source is not connected.`
-- The Guide page simulates the future agent environment without backend calls.
+- The Guide page includes a capped live proof panel and a simulated future agent environment.
 
-The current demo is intentionally static so judges can open it safely without cloud credentials, real personal data, OAuth secrets, or paid API usage.
+The current product demo is intentionally local and synthetic so judges can open it safely without real personal data, OAuth secrets, or paid API usage. The live proof endpoint is disabled unless deployment secrets are set.
+
+The CLI live proofs use preset synthetic traces and local daily call counters. The hosted proof endpoint uses the same safety model with a fixed query, server-side secrets, a low daily cap, and Vercel edge caching.
 
 ## Future Google-Scale Architecture
 
@@ -360,24 +362,34 @@ Google-scale Atlas should include:
 ## Repository Proof Artifacts
 
 - `agent/atlas-agent.md`: instructions for the future Atlas Life Story Agent.
+- `agent/google-adk/atlas-agent.mjs`: Google ADK agent artifact configured with Gemini 3 and MongoDB MCP.
 - `agent/mongodb/seed-data.json`: MongoDB-shaped synthetic collections.
 - `agent/mongodb/mcp-server.example.json`: example MCP server configuration.
 - `scripts/agent-proof.mjs`: local verifier for the source-gated reasoning contract.
+- `scripts/live-agent-proof.mjs`: preset-only live Gemini proof through Google Agent Platform / Vertex AI.
+- `scripts/agent-builder-mongodb-mcp.mjs`: functional local Agent Builder + MongoDB MCP proof with real MCP tool calls.
+- `api/live-agent-proof.js`: hosted Vercel proof endpoint for fixed-query Gemini and MongoDB MCP verification.
+- `docs/LIVE_AGENT_PROOF.md`: cloud project, budget, command, and limitation notes for the live proof.
+- `docs/AGENT_BUILDER_MCP_PROOF.md`: ADK, MongoDB MCP, local MongoDB, and Gemini proof commands.
 
 Run:
 
 ```bash
 npm run agent:proof
+npm run agent:live:dry
+npm run agent:builder:mcp:dry
 ```
 
 ## Current Known Limits
 
-- No live Google Cloud Agent Builder deployment.
-- No live Gemini runtime.
-- No live MongoDB Atlas database.
+- No public Google Cloud Agent Builder deployment.
+- Hosted Gemini/MongoDB MCP proof is disabled until Vercel secrets and MongoDB Atlas seed data are configured.
+- Separate CLI live Gemini proof exists through Google Agent Platform / Vertex AI.
+- Separate local Agent Builder + MongoDB MCP proof exists with Google ADK and the official MongoDB MCP server.
+- No committed MongoDB Atlas credentials.
 - No real OAuth consent flow.
 - No real Google API integration.
-- No backend.
+- No broad backend beyond the fixed capped proof endpoint.
 - No real personal data.
 
 These limits are intentional for the submitted prototype. The architecture above describes the correct future implementation path, not current live behavior.

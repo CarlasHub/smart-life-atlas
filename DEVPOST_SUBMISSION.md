@@ -27,6 +27,7 @@ This is the kind of cross-app risk a Google-native agent should be able to find:
 - Provides a guided resolution path instead of only warning the user.
 - Answers preset assistant questions only when the required sources are connected.
 - Demonstrates memory recall with the 11 June 2022 Lisbon history example.
+- Includes a new 2:07 demo video showing the product flow, source-gated reasoning, evidence, memory, and the Google Cloud / MongoDB MCP proof story.
 
 ## Google Ecosystem Story
 
@@ -37,7 +38,7 @@ This is the kind of cross-app risk a Google-native agent should be able to find:
 - Google Cloud Agent Builder would coordinate next-step workflows, such as preparing a remote notary request.
 - MongoDB MCP would support a future secure memory and life-signal store.
 
-The current prototype uses local synthetic data to demonstrate this architecture safely. It does not make real Google API calls.
+The product UI uses local synthetic data to demonstrate this architecture safely. A separate capped proof path can call Gemini through Vertex AI and MongoDB MCP when server-side secrets are configured.
 
 ## Why This Matters For Google
 
@@ -57,33 +58,42 @@ The current prototype uses local synthetic data to demonstrate this architecture
 - Lucide React
 - Local deterministic synthetic data
 - Google Cloud Agent Builder instructions for the Atlas Life Story Agent
-- MongoDB MCP integration proof using `@mongodb-js/mongodb-mcp-server`
+- Google ADK / Agent Builder artifact configured for Gemini 3 and MongoDB MCP
+- MongoDB MCP integration proof using the official `mongodb-mcp-server` package
+- Capped Vercel API route for the hosted live proof panel
 - MongoDB-shaped synthetic seed collections for life signals, evidence, memory, and resolution paths
+- Budget-guarded live Gemini proof through Google Agent Platform / Vertex AI
 
 ## Agent Builder and MongoDB MCP Proof
 
 The repository includes a clean integration package under `agent/`:
 
 - `agent/atlas-agent.md` defines the Atlas Life Story Agent instructions for Google Cloud Agent Builder.
+- `agent/google-adk/atlas-agent.mjs` defines the Google ADK `LlmAgent` artifact for Gemini 3 and MongoDB MCP.
 - `agent/mongodb/seed-data.json` models the approved life-signal store as MongoDB collections.
 - `agent/mongodb/mcp-server.example.json` shows how to start the official MongoDB MCP server package.
 - `scripts/agent-proof.mjs` verifies the source-gated reasoning flow locally with the same synthetic evidence used by the app.
+- `scripts/live-agent-proof.mjs` runs a preset-only live Gemini proof through Google Agent Platform / Vertex AI from the same MongoDB-shaped evidence trace.
+- `scripts/agent-builder-mongodb-mcp.mjs` starts local MongoDB, seeds the synthetic database, calls the real MongoDB MCP server in read-only mode, creates the Google ADK agent, and optionally sends the MCP trace to Gemini.
+- `api/live-agent-proof.js` exposes a capped hosted proof route for the Vercel app. It only accepts the fixed `post-op` query, starts the official MongoDB MCP server in read-only mode, and calls Gemini only when server-side secrets are configured.
 
-The live UI also includes a Simulated Agent Environment in the Guide page. It shows the intended Google Sign-In consent, MongoDB MCP read, Agent Builder/Gemini reasoning, and evidence-backed answer flow without a backend or cloud calls.
+The live UI also includes a Guide -> Trust & security panel with a live proof button and a Simulated Agent Environment. The live proof button is server-side and capped; the surrounding product UI remains synthetic and local.
 
 Judges can run:
 
 ```bash
 npm run agent:proof
+npm run agent:live:dry
+npm run agent:builder:mcp:dry
 ```
 
 The proof reconstructs the Post-Op Compliance Trap from MongoDB-shaped evidence IDs, confirms the 08:00 procedure, 36-hour no-fly restriction, 19:30 flight, Friday 09:00 legal signing, Friday 12:00 deadline, $250,000 valuation risk, and Clause 8.1 remote notary workaround.
 
 ## Important Technical Note
 
-This submitted web app does not use real OAuth, real Gmail, real Calendar APIs, real health data, real financial data, a backend, or the Gemini API yet. All app data is synthetic and local. Source toggles control deterministic demo logic so judges can verify privacy, consent, evidence, and source-gated reasoning safely.
+This submitted web app does not use real OAuth, real Gmail, real Calendar APIs, real health data, or real financial data. All product UI data is synthetic and local. Source toggles control deterministic demo logic so judges can verify privacy, consent, evidence, and source-gated reasoning safely.
 
-The repository now includes the credential-ready Agent Builder and MongoDB MCP proof described above. A live deployment still requires a Google Cloud project, Google Cloud Agent Builder configuration, a MongoDB Atlas database, and secrets that are intentionally not committed.
+The repository now includes the credential-ready Agent Builder and MongoDB MCP proof described above, a functional local Agent Builder + MongoDB MCP proof, a capped Vercel live proof endpoint, and a minimal live Gemini CLI proof in the dedicated `atlas-agent-20260611` Google Cloud project. The live proofs only allow preset demo queries, use low daily call caps, and are covered by a GBP 1 monthly budget alert. The hosted endpoint requires MongoDB Atlas data and Vercel secrets that are intentionally not committed.
 
 The future implementation plan is to add Google Sign-In, request narrow OAuth scopes, move the deterministic reasoning layer into Gemini, orchestrate approved actions through Google Cloud Agent Builder, and query a secure life-signal store through MongoDB MCP.
 

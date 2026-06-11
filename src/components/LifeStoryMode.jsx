@@ -168,7 +168,7 @@ export function LifeStoryMode({ activeDimensions, onNavigate }) {
           <p className="eyebrow">Atlas Life Story Mode</p>
           <h2 id="life-story-title" className="text-headline-medium">A daily story built from approved signals.</h2>
           <p className="text-body-large">
-            This cost-free prototype turns local synthetic evidence into an interactive life narrative. No backend, cloud calls, or paid services are used.
+            This product view turns local synthetic evidence into an interactive life narrative without real account data or autonomous actions.
           </p>
         </div>
 

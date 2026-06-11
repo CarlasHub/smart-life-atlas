@@ -6,6 +6,11 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
+.atlas-live-agent-usage.json
+.atlas-agent-builder-usage.json
+.atlas-mongodb-data/
+.atlas-mongodb.log*
+.env
 
 node_modules
 dist

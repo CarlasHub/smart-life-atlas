@@ -35,11 +35,21 @@
     "dev": "vite",
     "build": "vite build",
     "agent:proof": "node scripts/agent-proof.mjs",
+    "agent:live": "node scripts/live-agent-proof.mjs --live",
+    "agent:live:dry": "node scripts/live-agent-proof.mjs",
+    "agent:builder:mcp": "node scripts/agent-builder-mongodb-mcp.mjs --live",
+    "agent:builder:mcp:dry": "node scripts/agent-builder-mongodb-mcp.mjs",
+    "agent:seed:mongodb": "node scripts/seed-mongodb-demo.mjs",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@google/adk": "^1.2.0",
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "google-auth-library": "^10.7.0",
     "lucide-react": "^0.479.0",
+    "mongodb": "^7.3.0",
+    "mongodb-mcp-server": "^1.12.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6"
   },

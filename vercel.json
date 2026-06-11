@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/live-agent-proof.js": {
+      "maxDuration": 30
+    }
+  }
+}

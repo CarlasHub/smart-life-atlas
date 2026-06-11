@@ -24,8 +24,8 @@ const SIMULATION_STAGES = [
   {
     id: 'reasoning',
     label: 'Agent reasoning',
-    title: 'Agent Builder and Gemini are simulated as a visible trace.',
-    detail: 'The Briefing Agent trace shows the same planned flow: read approved sources, query evidence IDs, connect the timeline, and propose the safest next step.',
+    title: 'Agent Builder and Gemini are shown as a visible trace.',
+    detail: 'The Briefing Agent trace mirrors the live proof flow: read approved sources, query evidence IDs, connect the timeline, and propose the safest next step.',
     input: 'Why is tomorrow risky?',
     output: 'Post-Op Compliance Trap with Clause 8.1 workaround.',
     icon: Sparkles,
@@ -34,7 +34,7 @@ const SIMULATION_STAGES = [
     id: 'answer',
     label: 'Evidence-backed answer',
     title: 'The answer is generated locally from synthetic records.',
-    detail: 'The live demo does not call Google Cloud, Gemini, MongoDB, Gmail, Calendar, Drive, or third-party APIs. It uses deterministic local data so judging stays safe and free to open.',
+    detail: 'This workbench uses deterministic local data. The separate live proof panel calls the capped server endpoint when Google Cloud and MongoDB Atlas secrets are configured.',
     input: 'sig-001, sig-002, sig-004, sig-006, sig-007, sig-008',
     output: 'Timing conflict, evidence list, impact summary, and resolution path.',
     icon: FileText,
@@ -42,8 +42,8 @@ const SIMULATION_STAGES = [
 ];
 
 const STATIC_GUARDS = [
-  { label: 'Backend', value: 'Not used', icon: ServerOff },
-  { label: 'Cloud calls', value: '0 in live demo', icon: ShieldCheck },
+  { label: 'Backend', value: 'Capped API route', icon: ServerOff },
+  { label: 'Cloud calls', value: 'Preset proof only', icon: ShieldCheck },
   { label: 'Data', value: 'Synthetic local records', icon: Database },
 ];
 
@@ -67,9 +67,9 @@ export function SimulatedEnvironment({ activeDimensions }) {
       <div className="sim-env-header">
         <div className="section-heading compact">
           <p className="eyebrow">Simulated agent environment</p>
-          <h2 id="sim-env-title" className="text-headline-medium">The full cloud path, shown safely in the browser.</h2>
+          <h2 id="sim-env-title" className="text-headline-medium">The cloud path, shown safely in the browser.</h2>
           <p className="text-body-medium">
-            This frontend simulates the planned Google Sign-In, Google Cloud Agent Builder, Gemini, and MongoDB MCP flow without real credentials, network calls, or backend charges.
+            This workbench simulates Google Sign-In consent and source-gated reasoning. The live proof panel above is the only part designed to make a capped backend call.
           </p>
         </div>
 

@@ -1,4 +1,5 @@
 import { CheckCircle2, ChevronRight, Cloud, Database, ShieldCheck } from 'lucide-react';
+import { LiveAgentProof } from './LiveAgentProof';
 import { SimulatedEnvironment } from './SimulatedEnvironment';
 
 const STEPS = [
@@ -13,17 +14,17 @@ const STEPS = [
 const PLATFORM_STATUS = [
   {
     title: 'Live web demo',
-    desc: 'This page is a static React/Vite demo with local synthetic data. It runs on Vercel or GitHub Pages without a backend.',
+    desc: 'The Vercel app can call a capped server-side live proof when secrets are configured; the rest of the product demo uses local synthetic data.',
     icon: Cloud,
   },
   {
     title: 'Agent proof',
-    desc: 'The repo includes Agent Builder instructions, MongoDB-shaped seed data, and a local proof script for source-gated reasoning.',
+    desc: 'The repo includes Google ADK instructions, MongoDB MCP proof code, and source-gated local verifier scripts.',
     icon: Database,
   },
   {
     title: 'Backend path',
-    desc: 'A real agent deployment needs Google Cloud Agent Builder, Gemini, MongoDB Atlas, and secrets stored outside the public repo.',
+    desc: 'The live proof requires Gemini access, MongoDB Atlas seed data, and Vercel secrets stored outside the public repo.',
     icon: ShieldCheck,
   },
 ];
@@ -95,7 +96,7 @@ export function Guide({ activeDimensions, onNavigate, activeTab = 'steps', onTab
               <p className="eyebrow">Trust & security</p>
               <h2 id="platform-status-title" className="text-headline-medium">What is live, what is simulated, and what needs credentials.</h2>
               <p className="text-body-medium">
-                This is the demo security model: local synthetic records, visible source gates, no cloud calls, and a clear path to Google Cloud and MongoDB when credentials are available.
+                This is the demo security model: local synthetic records for the product UI, visible source gates, and a capped backend route for the live Gemini and MongoDB MCP proof.
               </p>
             </div>
 
@@ -112,10 +113,11 @@ export function Guide({ activeDimensions, onNavigate, activeTab = 'steps', onTab
             </div>
 
             <p className="platform-note">
-              Use the Vercel link for the live demo and the GitHub link for source code. GitHub Pages is fine for static hosting, but it cannot run the future agent backend.
+              Use the Vercel link for the live demo and the GitHub link for source code. GitHub Pages can host the static app, but only Vercel can run the capped API route in this repo.
             </p>
           </section>
 
+          <LiveAgentProof />
           <SimulatedEnvironment activeDimensions={activeDimensions} />
         </section>
       )}
