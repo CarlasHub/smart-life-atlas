@@ -1,122 +1,116 @@
-import {
-  CheckCircle2,
-  ChevronLeft,
-  ChevronRight,
-  Eye,
-  Map,
-  PlayCircle,
-  RotateCcw,
-  ShieldCheck,
-  Sparkles,
-  X
-} from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { ChevronLeft, ChevronRight, PlayCircle, Sparkles, X } from 'lucide-react';
 import { AtlasSpark } from './AtlasSpark';
 
 const STEPS = [
   {
     id: 'start',
     shortLabel: 'Home',
-    eyebrow: 'Judge Mode',
-    title: 'Run the 60-second Atlas demo.',
-    body: 'Start from the morning story, then follow the exact path judges should see: consent, conflict detection, evidence, assistant answer, refusal, and trust model.',
+    eyebrow: 'Judge overlay',
+    title: 'Start with the morning story.',
+    body: 'Atlas opens like a personal intelligence companion: one clear life narrative, one important insight, and simple next actions.',
     lookFor: 'A human product experience, not a dashboard.',
-    takeaway: 'Atlas frames scattered life signals as one calm daily story.',
-    actionLabel: 'Start from Home',
+    actionLabel: 'Next: Consent',
     view: 'home',
-    checklist: ['Reset demo sources', 'Open the landing experience'],
+    targetSelector: '.hero-actions',
+    restoreSources: true,
   },
   {
     id: 'connect',
     shortLabel: 'Consent',
     eyebrow: 'Consent first',
-    title: 'Show that intelligence starts with approval.',
-    body: 'Atlas only reasons over connected life areas. The demo opens with Health, Travel, Integrity, Family, and Memory on, while Money stays off.',
+    title: 'Life areas control the reasoning.',
+    body: 'The Connect page shows plain-language permission areas before app-level detail. Turning a life area off changes what Atlas can answer.',
     lookFor: 'Life areas come before app-level details.',
-    takeaway: 'The product makes consent understandable to normal users.',
-    actionLabel: 'Open Connect',
+    actionLabel: 'Next: Conflict',
     view: 'connect',
-    checklist: ['Life areas are visible', 'Source toggles are real'],
+    targetSelector: '.life-area-grid .dimension-card',
+    restoreSources: true,
   },
   {
     id: 'briefing',
     shortLabel: 'Conflict',
     eyebrow: 'Hidden conflict',
-    title: 'Open the Post-Op Compliance Trap.',
-    body: 'This is the strongest demo moment: procedure at 08:00, no flying for 36 hours, flight at 19:30, legal signing Friday 09:00, and a Friday 12:00 deadline.',
+    title: 'The conflict becomes one story.',
+    body: 'Atlas connects the 08:00 procedure, 36-hour no-fly rule, 19:30 flight, Friday 09:00 signing, and Friday 12:00 deadline.',
     lookFor: 'The medical, travel, and legal facts become one story.',
-    takeaway: 'Atlas finds a cross-app risk a normal calendar would miss.',
-    actionLabel: 'Open Briefing',
+    actionLabel: 'Next: Evidence',
     view: 'briefing',
-    checklist: ['Timing conflict visible', '$250,000 risk visible'],
+    targetSelector: '.important-conflict',
+    restoreSources: true,
   },
   {
     id: 'evidence',
     shortLabel: 'Evidence',
     eyebrow: 'Evidence layer',
-    title: 'Show why Atlas reached the conclusion.',
-    body: 'Use the briefing trace and evidence cards to show that Atlas connects source records before suggesting Clause 8.1 as the remote notary path.',
+    title: 'Every claim has a source.',
+    body: 'The evidence section lets a reviewer inspect the signals behind the timing conflict and Clause 8.1 remote notary path.',
     lookFor: 'The trace, evidence cards, and Clause 8.1 workaround.',
-    takeaway: 'Every important claim has a supporting signal.',
-    actionLabel: 'Review evidence',
+    actionLabel: 'Next: Ask',
     view: 'briefing',
-    checklist: ['Trace is inspectable', 'Clause 8.1 is cited'],
+    targetSelector: '.evidence-grid .evidence-card',
+    restoreSources: true,
   },
   {
     id: 'ask',
     shortLabel: 'Ask',
     eyebrow: 'Assistant proof',
-    title: 'Ask why tomorrow is risky.',
-    body: 'Atlas answers from approved synthetic sources. This demonstrates the Gemini-style assistant behavior without a backend or cloud charge.',
+    title: 'The assistant answers from approved sources.',
+    body: 'The preset question demonstrates deterministic source-aware reasoning without a backend or cloud charge.',
     lookFor: 'The assistant sends the preset question and answers from approved sources.',
-    takeaway: 'Atlas feels agentic while remaining deterministic and safe.',
-    actionLabel: 'Ask the risky question',
+    actionLabel: 'Next: Refusal',
     view: 'ask',
+    targetSelector: '.preset-queries',
     queryId: 'risky',
     resetChat: true,
-    checklist: ['Question is sent', 'Answer explains the conflict'],
+    restoreSources: true,
   },
   {
     id: 'refusal',
     shortLabel: 'Refusal',
     eyebrow: 'Source gate',
-    title: 'Turn Travel off and ask again.',
-    body: 'This proves Atlas is not just a scripted warning screen. When a required source is unavailable, the assistant refuses instead of guessing.',
+    title: 'Missing sources stop the answer.',
+    body: 'Travel is turned off, then the same risky-tomorrow question is refused. Atlas does not guess when required context is missing.',
     lookFor: 'Travel is removed, then the same question is refused.',
-    takeaway: 'Consent changes the answer path immediately.',
-    actionLabel: 'Show source refusal',
+    actionLabel: 'Next: Trust',
     view: 'ask',
+    targetSelector: '.message-list',
     disableTravel: true,
     queryId: 'risky',
-    checklist: ['Travel is disconnected', 'Assistant refuses cleanly'],
   },
   {
     id: 'security',
     shortLabel: 'Trust',
     eyebrow: 'Trust model',
-    title: 'Finish on Trust & security.',
-    body: 'Show that the live demo is synthetic and free to open, while the future path is Google Sign-In, Agent Builder, Gemini, and MongoDB MCP.',
+    title: 'The safe demo path is explicit.',
+    body: 'Trust & security explains what is live, what is simulated, and how the future Google Sign-In, Agent Builder, Gemini, and MongoDB MCP path would work.',
     lookFor: 'No cloud calls, synthetic data, and the future backend path.',
-    takeaway: 'The demo is safe today and has a credible production architecture.',
-    actionLabel: 'Open Trust & security',
+    actionLabel: 'Next: Finish',
     view: 'guide',
     guideTab: 'security',
+    targetSelector: '.platform-status-grid .platform-card',
     restoreSources: true,
-    checklist: ['No cloud calls in demo', 'Backend path is clear'],
   },
   {
     id: 'finish',
     shortLabel: 'Ready',
     eyebrow: 'Ready to judge',
-    title: 'The core story is complete.',
-    body: 'Atlas has shown the full path: approved sources become a daily story, hidden risks become explainable, evidence stays visible, and missing sources stop the answer.',
+    title: 'The product story is complete.',
+    body: 'The tour has shown the core loop: approved sources become a daily story, hidden risks become explainable, and missing sources block answers.',
     lookFor: 'A complete concept, not only isolated screens.',
-    takeaway: 'Atlas is a Google ecosystem life intelligence layer with a safe static proof.',
-    actionLabel: 'Restart demo',
+    actionLabel: 'Finish tour',
     view: 'home',
+    targetSelector: '.insight-main',
     restoreSources: true,
-    checklist: ['Concept is clear', 'No-cost demo path is complete'],
   },
 ];
+
+const DEFAULT_SPOTLIGHT = {
+  top: 88,
+  left: 260,
+  width: 420,
+  height: 260,
+};
 
 export function JudgeMode({
   isOpen,
@@ -129,153 +123,232 @@ export function JudgeMode({
   onDisableTravel,
   onAskDemoQuery,
   onOpenGuideSecurity,
-  onResetDemo,
 }) {
   const step = STEPS[stepIndex] || STEPS[0];
   const isLastStep = stepIndex === STEPS.length - 1;
   const progress = ((stepIndex + 1) / STEPS.length) * 100;
+  const [spotlight, setSpotlight] = useState(DEFAULT_SPOTLIGHT);
+  const [cardPosition, setCardPosition] = useState({ top: 112, left: 704 });
 
-  const runStep = () => {
-    if (step.restoreSources || step.id === 'start' || step.id === 'connect' || step.id === 'briefing' || step.id === 'evidence' || step.id === 'ask') {
+  useEffect(() => {
+    if (!isOpen) {
+      return undefined;
+    }
+
+    const mainViewport = document.querySelector('.main-viewport');
+    let scrollTimer;
+    let measureTimer;
+
+    const measure = () => {
+      const target = document.querySelector(step.targetSelector) || document.querySelector('.main-content') || document.querySelector('.main-viewport');
+
+      if (!target) {
+        setSpotlight(DEFAULT_SPOTLIGHT);
+        setCardPosition({ top: 112, left: 704 });
+        return;
+      }
+
+      const rect = target.getBoundingClientRect();
+      const pad = window.innerWidth <= 640 ? 6 : 10;
+      const nextSpotlight = {
+        top: Math.max(8, rect.top - pad),
+        left: Math.max(8, rect.left - pad),
+        width: Math.min(window.innerWidth - 16, rect.width + pad * 2),
+        height: Math.min(window.innerHeight - 16, rect.height + pad * 2),
+      };
+
+      const cardWidth = Math.min(360, window.innerWidth - 32);
+      const cardHeight = 250;
+      let left = rect.right + 18;
+      let top = Math.max(16, rect.top + 16);
+
+      if (left + cardWidth > window.innerWidth - 16) {
+        left = rect.left - cardWidth - 18;
+      }
+
+      if (left < 16) {
+        left = Math.min(window.innerWidth - cardWidth - 16, rect.left + 16);
+      }
+
+      if (top + cardHeight > window.innerHeight - 16) {
+        top = Math.max(16, window.innerHeight - cardHeight - 16);
+      }
+
+      setSpotlight(nextSpotlight);
+      setCardPosition({ top, left });
+    };
+
+    const scrollTargetIntoView = () => {
+      const target = document.querySelector(step.targetSelector);
+
+      if (target) {
+        target.scrollIntoView({
+          behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+          block: 'center',
+          inline: 'nearest',
+        });
+      }
+
+      measureTimer = window.setTimeout(measure, 220);
+    };
+
+    scrollTimer = window.setTimeout(scrollTargetIntoView, 80);
+    window.addEventListener('resize', measure);
+    mainViewport?.addEventListener('scroll', measure, { passive: true });
+
+    return () => {
+      window.clearTimeout(scrollTimer);
+      window.clearTimeout(measureTimer);
+      window.removeEventListener('resize', measure);
+      mainViewport?.removeEventListener('scroll', measure);
+    };
+  }, [isOpen, step]);
+
+  const prepareStep = (targetStep) => {
+    if (targetStep.restoreSources || targetStep.id === 'start' || targetStep.id === 'connect' || targetStep.id === 'briefing' || targetStep.id === 'evidence' || targetStep.id === 'ask') {
       onRestoreSources();
     }
 
-    if (step.disableTravel) {
+    if (targetStep.disableTravel) {
       onDisableTravel();
     }
 
-    if (step.guideTab === 'security') {
+    if (targetStep.guideTab === 'security') {
       onOpenGuideSecurity();
     } else {
-      onNavigate(step.view);
+      onNavigate(targetStep.view);
     }
 
-    if (step.queryId) {
-      onAskDemoQuery(step.queryId, { reset: step.resetChat });
+    if (targetStep.queryId) {
+      window.setTimeout(() => {
+        onAskDemoQuery(targetStep.queryId, { reset: targetStep.resetChat });
+      }, 160);
     }
+  };
 
+  const openTour = () => {
+    prepareStep(STEPS[0]);
+    onStepChange(0);
+    onOpen();
+  };
+
+  const goToStep = (nextIndex) => {
+    const safeIndex = Math.min(Math.max(nextIndex, 0), STEPS.length - 1);
+    const nextStep = STEPS[safeIndex];
+
+    prepareStep(nextStep);
+    onStepChange(safeIndex);
+  };
+
+  const runStep = () => {
     if (isLastStep) {
+      onClose();
       onStepChange(0);
       return;
     }
 
-    onStepChange(stepIndex + 1);
+    goToStep(stepIndex + 1);
   };
 
   if (!isOpen) {
     return (
-      <button type="button" className="judge-mode-launcher" onClick={onOpen}>
+      <button type="button" className="judge-mode-launcher" onClick={openTour} aria-label="Start Judge overlay">
         <span className="judge-launch-icon"><PlayCircle size={20} aria-hidden="true" /></span>
         <span>
-          <strong>Judge Mode</strong>
-          <small>60-second guided demo</small>
+          <strong>Judge overlay</strong>
+          <small>Spotlight the demo</small>
         </span>
       </button>
     );
   }
 
   return (
-    <aside className="judge-mode-panel" aria-label="Judge Mode walkthrough">
-      <header className="judge-mode-header">
-        <div className="judge-mode-title">
-          <AtlasSpark size={34} active />
-          <div>
-            <p className="eyebrow">{step.eyebrow}</p>
-            <h2 className="text-title-large">Guided demo</h2>
+    <>
+      <div
+        className="judge-tour-spotlight"
+        style={{
+          '--spotlight-top': `${spotlight.top}px`,
+          '--spotlight-left': `${spotlight.left}px`,
+          '--spotlight-width': `${spotlight.width}px`,
+          '--spotlight-height': `${spotlight.height}px`,
+        }}
+        aria-hidden="true"
+      />
+
+      <aside
+        className="judge-tour-card"
+        style={{
+          '--tour-card-top': `${cardPosition.top}px`,
+          '--tour-card-left': `${cardPosition.left}px`,
+        }}
+        aria-label="Judge overlay guided tour"
+      >
+        <header className="judge-tour-header">
+          <div className="judge-tour-title">
+            <AtlasSpark size={30} active />
+            <div>
+              <p className="eyebrow">{step.eyebrow}</p>
+              <h2 className="text-title-medium">{step.shortLabel}</h2>
+            </div>
           </div>
+          <button type="button" className="judge-icon-button" onClick={onClose} aria-label="Close Judge overlay">
+            <X size={18} aria-hidden="true" />
+          </button>
+        </header>
+
+        <div className="judge-progress" aria-label={`Step ${stepIndex + 1} of ${STEPS.length}`}>
+          <span style={{ width: `${progress}%` }} />
         </div>
-        <button type="button" className="judge-icon-button" onClick={onClose} aria-label="Close Judge Mode">
-          <X size={19} aria-hidden="true" />
-        </button>
-      </header>
 
-      <div className="judge-route" aria-label="Demo route">
-        <div className="judge-route-heading">
-          <Map size={16} aria-hidden="true" />
-          <span>Demo route</span>
+        <div className="judge-tour-copy" aria-live="polite">
+          <span className="judge-step-count">Step {stepIndex + 1} of {STEPS.length}</span>
+          <h3 className="text-title-large">{step.title}</h3>
+          <p className="text-body-medium">{step.body}</p>
         </div>
-        <div className="judge-route-steps">
-          {STEPS.map((item, index) => (
-            <button
-              key={item.id}
-              type="button"
-              className={`judge-route-step ${index === stepIndex ? 'active' : ''} ${index < stepIndex ? 'complete' : ''}`}
-              onClick={() => onStepChange(index)}
-              aria-current={index === stepIndex ? 'step' : undefined}
-            >
-              <span>{index + 1}</span>
-              <small>{item.shortLabel}</small>
-            </button>
-          ))}
-        </div>
-      </div>
 
-      <div className="judge-progress" aria-label={`Step ${stepIndex + 1} of ${STEPS.length}`}>
-        <span style={{ width: `${progress}%` }} />
-      </div>
+        <footer className="judge-tour-actions">
+          <button
+            type="button"
+            className="judge-icon-button"
+            onClick={() => goToStep(stepIndex - 1)}
+            aria-label="Previous Judge overlay step"
+            disabled={stepIndex === 0}
+          >
+            <ChevronLeft size={18} aria-hidden="true" />
+          </button>
 
-      <div className="judge-step-copy" aria-live="polite">
-        <span className="judge-step-count">Step {stepIndex + 1} of {STEPS.length}</span>
-        <h3 className="text-headline-medium">{step.title}</h3>
-        <p className="text-body-medium">{step.body}</p>
-      </div>
+          <button type="button" className="m3-button primary" onClick={runStep}>
+            {isLastStep ? <Sparkles size={17} aria-hidden="true" /> : <ChevronRight size={17} aria-hidden="true" />}
+            {step.actionLabel}
+          </button>
 
-      <div className="judge-proof-list" aria-label="What this step proves">
-        {step.checklist.map((item) => (
-          <span key={item}>
-            {step.id === 'refusal' ? <ShieldCheck size={16} aria-hidden="true" /> : <CheckCircle2 size={16} aria-hidden="true" />}
-            {item}
-          </span>
+          <button
+            type="button"
+            className="judge-icon-button"
+            onClick={() => goToStep(stepIndex + 1)}
+            aria-label="Next Judge overlay step"
+            disabled={isLastStep}
+          >
+            <ChevronRight size={18} aria-hidden="true" />
+          </button>
+        </footer>
+
+      </aside>
+
+      <div className="judge-tour-stepper" aria-label="Tour steps">
+        {STEPS.map((item, index) => (
+          <button
+            key={item.id}
+            type="button"
+            className={index === stepIndex ? 'active' : ''}
+            onClick={() => goToStep(index)}
+            aria-label={`Go to ${item.shortLabel} Judge overlay step`}
+            aria-current={index === stepIndex ? 'step' : undefined}
+          >
+            <span>{index + 1}</span>
+          </button>
         ))}
       </div>
-
-      <div className="judge-context-grid">
-        <article>
-          <span>Look for</span>
-          <p>{step.lookFor}</p>
-        </article>
-        <article>
-          <span>Judge takeaway</span>
-          <p>{step.takeaway}</p>
-        </article>
-      </div>
-
-      <footer className="judge-mode-actions">
-        <button
-          type="button"
-          className="judge-icon-button"
-          onClick={() => onStepChange(Math.max(0, stepIndex - 1))}
-          aria-label="Previous Judge Mode step"
-          disabled={stepIndex === 0}
-        >
-          <ChevronLeft size={19} aria-hidden="true" />
-        </button>
-
-        <button type="button" className="m3-button primary" onClick={runStep}>
-          {isLastStep ? <RotateCcw size={17} aria-hidden="true" /> : <Sparkles size={17} aria-hidden="true" />}
-          {isLastStep ? 'Restart demo' : step.actionLabel}
-        </button>
-
-        <button
-          type="button"
-          className="judge-icon-button"
-          onClick={() => onStepChange(Math.min(STEPS.length - 1, stepIndex + 1))}
-          aria-label="Next Judge Mode step"
-          disabled={isLastStep}
-        >
-          <ChevronRight size={19} aria-hidden="true" />
-        </button>
-      </footer>
-
-      <button type="button" className="judge-reset-button" onClick={onResetDemo}>
-        <RotateCcw size={15} aria-hidden="true" />
-        Reset demo state
-      </button>
-
-      <p className="judge-mode-note">
-        <Eye size={15} aria-hidden="true" />
-        Built for judging: one clear path through consent, evidence, reasoning, refusal, and trust.
-      </p>
-    </aside>
+    </>
   );
 }

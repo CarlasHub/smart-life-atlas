@@ -64,7 +64,7 @@ export function Home({ activeDimensions, onNavigate, onStartJudgeMode }) {
               Connect sources
             </button>
             <button type="button" className="m3-button outlined" onClick={onStartJudgeMode}>
-              Judge Mode
+              Judge overlay
             </button>
           </div>
 

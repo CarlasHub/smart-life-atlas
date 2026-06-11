@@ -33,15 +33,6 @@
     bottom: var(--space-m);
     max-width: min(18rem, calc(100vw - (var(--space-m) * 2)));
   }
-
-  .judge-mode-panel {
-    right: auto;
-    bottom: var(--space-m);
-    left: calc(var(--sidebar-width) + var(--space-m));
-    width: min(28rem, calc(100vw - var(--sidebar-width) - (var(--space-m) * 2)));
-    max-height: calc(100dvh - (var(--space-m) * 2));
-    padding: var(--space-m);
-  }
 }
 
 @media (max-width: 860px) {
@@ -110,16 +101,17 @@
     bottom: calc(5.65rem + env(safe-area-inset-bottom));
   }
 
-  .judge-mode-panel {
+  .judge-tour-card {
+    top: auto !important;
     left: var(--space-m);
-    right: auto;
+    right: var(--space-m);
     bottom: calc(5.65rem + env(safe-area-inset-bottom));
-    width: min(32rem, calc(100vw - (var(--space-m) * 2)));
-    max-height: calc(100dvh - 7rem - env(safe-area-inset-bottom));
+    width: auto;
+    max-height: min(20rem, calc(100dvh - 7rem - env(safe-area-inset-bottom)));
   }
 
-  .judge-route-steps {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+  .judge-tour-stepper {
+    display: none;
   }
 
   .guide-tabs {
@@ -246,16 +238,12 @@
     }
   }
 
-  .judge-mode-panel {
+  .judge-tour-card {
     padding: var(--space-m);
     border-radius: var(--md-sys-shape-corner-large);
   }
 
-  .judge-context-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .judge-mode-actions {
+  .judge-tour-actions {
     grid-template-columns: auto minmax(0, 1fr) auto;
 
     .m3-button {
@@ -338,13 +326,9 @@
     justify-content: center;
   }
 
-  .judge-mode-header,
-  .judge-mode-actions {
+  .judge-tour-header,
+  .judge-tour-actions {
     gap: 0.5rem;
-  }
-
-  .judge-route-steps {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .m3-nav-item .nav-label {

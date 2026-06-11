@@ -79,14 +79,6 @@ function App() {
     setJudgeStepIndex(0);
   };
 
-  const resetJudgeDemo = () => {
-    restoreDemoSources();
-    setAskDemoQuery(null);
-    setGuideTab('steps');
-    setActiveView('home');
-    setJudgeStepIndex(0);
-  };
-
   const renderView = () => {
     switch (activeView) {
       case 'briefing':
@@ -146,7 +138,6 @@ function App() {
         onDisableTravel={disableTravelForDemo}
         onAskDemoQuery={askDemoQuestion}
         onOpenGuideSecurity={openGuideSecurity}
-        onResetDemo={resetJudgeDemo}
       />
     </div>
   );
