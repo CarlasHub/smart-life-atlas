@@ -107,6 +107,12 @@ node scripts/agent-proof.mjs --query=memory
 
 This is not a live Google Cloud deployment. A full deployment still requires a Google Cloud project, Google Cloud Agent Builder configuration, a MongoDB Atlas database, and credentials that are not committed to this repo.
 
+## Technical Docs
+
+- [Architecture](docs/ARCHITECTURE.md): current static demo, future agent architecture, source-gated flow, and UI surfaces.
+- [Data Schema](docs/DATA_SCHEMA.md): MongoDB-shaped collections, field definitions, validation rules, and example queries.
+- [Safety And Constraints](docs/SAFETY_AND_CONSTRAINTS.md): source-gating rules, privacy constraints, action limits, cost controls, and safety tests.
+
 ## Demo Flow
 
 1. Open the app with `npm run dev`.
