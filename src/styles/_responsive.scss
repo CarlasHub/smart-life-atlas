@@ -88,6 +88,14 @@
     padding: var(--space-l);
   }
 
+  .guide-tabs {
+    width: 100%;
+  }
+
+  .guide-tab {
+    min-width: 0;
+  }
+
   .home-hero,
   .briefing-hero,
   .assistant-hero,

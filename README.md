@@ -124,7 +124,7 @@ This is not a live Google Cloud deployment. A full deployment still requires a G
 7. Open Memory and review the 11 June 2022 Lisbon answer with confidence, evidence, and uncertainty.
 8. Open Ask Atlas and try the preset questions.
 9. Toggle life areas off to verify that Atlas refuses to answer when the required authorized source is unavailable.
-10. Open Guide and review the Platform status and Simulated agent environment sections for the static demo, Agent Builder proof, and backend path.
+10. Open Guide, switch to the Trust & security tab, and review the Platform status and Simulated agent environment sections for the static demo, Agent Builder proof, and backend path.
 
 The demo opens with Health, Travel, Integrity, Family, and Memory enabled so the main narrative is visible immediately. Money remains off by default. Turning any required area off removes it from the reasoning path.
 
@@ -148,6 +148,7 @@ The demo opens with Health, Travel, Integrity, Family, and Memory enabled so the
 - Buttons are real `button` elements with visible focus states.
 - Source toggle buttons expose pressed state and text labels, not color alone.
 - The smart avatar uses text labels and status rows rather than relying on animation or color alone.
+- The Guide page uses accessible in-page tabs for First steps and Trust & security.
 - Evidence uses expandable `details` elements.
 - Confidence values use meter semantics where appropriate.
 - Copy avoids dense jargon and keeps next actions visible.
@@ -220,5 +221,5 @@ Playwright is not installed in this prototype. Use this manual checklist after U
 - Toggle Family off and verify "What am I forgetting?" is gated.
 - Re-enable sources and verify the Post-Op Compliance Trap and 11 June 2022 Memory answer return.
 - In Briefing, click each Agent trace node and preset question chip to verify the detail panel changes.
-- In Guide, click each Simulated agent environment stage and verify the detail panel changes without network access.
+- In Guide, switch between First steps and Trust & security, then click each Simulated agent environment stage and verify the detail panel changes without network access.
 - Keyboard-tab through navigation, source toggles, preset questions, evidence details, and guide buttons.

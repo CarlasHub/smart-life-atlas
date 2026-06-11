@@ -1395,6 +1395,44 @@
   gap: var(--space-s);
 }
 
+.guide-tabs {
+  width: fit-content;
+  max-width: 100%;
+  display: inline-grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.25rem;
+  padding: 0.25rem;
+  border: 1px solid var(--border);
+  border-radius: var(--md-sys-shape-corner-full);
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: var(--shadow-soft);
+}
+
+.guide-tab {
+  min-width: min(11rem, 42vw);
+  min-height: 2.75rem;
+  border: 0;
+  border-radius: var(--md-sys-shape-corner-full);
+  padding: 0.65rem 1rem;
+  background: transparent;
+  color: var(--md-sys-color-on-surface-variant);
+  font: inherit;
+  cursor: pointer;
+  @include label-large;
+  transition: background-color 160ms ease, color 160ms ease, box-shadow 160ms ease;
+
+  &.active {
+    background: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-on-primary-container);
+    box-shadow: inset 0 0 0 1px rgba(26, 115, 232, 0.14);
+  }
+}
+
+.trust-security-panel {
+  display: grid;
+  gap: var(--space-m);
+}
+
 .platform-status {
   display: grid;
   gap: var(--space-m);
