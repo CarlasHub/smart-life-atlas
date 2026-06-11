@@ -128,25 +128,25 @@ function App() {
             </button>
           ))}
         </div>
+
+        <JudgeMode
+          isOpen={judgeModeOpen}
+          onOpen={() => setJudgeModeOpen(true)}
+          onClose={() => setJudgeModeOpen(false)}
+          stepIndex={judgeStepIndex}
+          onStepChange={setJudgeStepIndex}
+          onNavigate={navigateTo}
+          onRestoreSources={restoreDemoSources}
+          onDisableTravel={disableTravelForDemo}
+          onAskDemoQuery={askDemoQuestion}
+          onOpenGuideSecurity={openGuideSecurity}
+          onResetDemo={resetJudgeDemo}
+        />
       </nav>
 
       <main className="main-viewport" id="main-content" ref={mainViewportRef}>
         {renderView()}
       </main>
-
-      <JudgeMode
-        isOpen={judgeModeOpen}
-        onOpen={() => setJudgeModeOpen(true)}
-        onClose={() => setJudgeModeOpen(false)}
-        stepIndex={judgeStepIndex}
-        onStepChange={setJudgeStepIndex}
-        onNavigate={navigateTo}
-        onRestoreSources={restoreDemoSources}
-        onDisableTravel={disableTravelForDemo}
-        onAskDemoQuery={askDemoQuestion}
-        onOpenGuideSecurity={openGuideSecurity}
-        onResetDemo={resetJudgeDemo}
-      />
     </div>
   );
 }

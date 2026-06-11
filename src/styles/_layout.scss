@@ -49,6 +49,7 @@ body {
   background: rgba(255, 255, 255, 0.76);
   border-right: 1px solid var(--border);
   backdrop-filter: blur(18px);
+  overflow-y: auto;
 }
 
 .nav-brand {

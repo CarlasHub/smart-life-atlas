@@ -108,20 +108,23 @@
 }
 
 .judge-mode-launcher {
-  position: fixed;
-  right: var(--space-l);
-  bottom: var(--space-l);
-  z-index: 30;
-  min-height: 3rem;
+  position: static;
+  z-index: 1;
+  width: 100%;
+  min-height: 3.55rem;
+  margin-top: auto;
   display: inline-flex;
   align-items: center;
+  justify-content: flex-start;
   gap: 0.7rem;
   border: 1px solid rgba(26, 115, 232, 0.18);
-  border-radius: var(--md-sys-shape-corner-full);
-  padding: 0.55rem 1rem 0.55rem 0.62rem;
-  background: rgba(255, 255, 255, 0.88);
+  border-radius: var(--md-sys-shape-corner-large);
+  padding: 0.55rem 0.7rem 0.55rem 0.55rem;
+  background:
+    radial-gradient(circle at 92% 8%, rgba(251, 188, 4, 0.22), transparent 32%),
+    rgba(255, 255, 255, 0.88);
   color: var(--md-sys-color-primary);
-  box-shadow: var(--shadow-lift);
+  box-shadow: var(--shadow-soft);
   backdrop-filter: blur(1rem);
   cursor: pointer;
   font-family: inherit;
@@ -152,22 +155,40 @@
 
 .judge-mode-panel {
   position: fixed;
-  right: var(--space-l);
+  top: var(--space-l);
   bottom: var(--space-l);
-  z-index: 30;
-  width: min(28rem, calc(100vw - (var(--space-l) * 2)));
-  max-height: min(42rem, calc(100dvh - (var(--space-l) * 2)));
+  left: var(--space-m);
+  z-index: 25;
+  width: calc(var(--sidebar-width) - (var(--space-m) * 2));
+  max-height: none;
+  margin-top: 0;
   display: grid;
-  gap: var(--space-m);
-  padding: var(--space-l);
+  gap: var(--space-s);
+  padding: var(--space-s);
   border: 1px solid rgba(26, 115, 232, 0.18);
-  border-radius: var(--md-sys-shape-corner-extra-large);
+  border-radius: var(--md-sys-shape-corner-large);
   background:
     radial-gradient(circle at 88% 8%, rgba(251, 188, 4, 0.18), transparent 26%),
     linear-gradient(150deg, rgba(255, 253, 248, 0.98), rgba(232, 240, 254, 0.94)),
     var(--md-sys-color-surface);
-  box-shadow: 0 1.25rem 3rem rgba(60, 64, 67, 0.2);
+  box-shadow: var(--shadow-soft);
   overflow-y: auto;
+  scrollbar-gutter: stable;
+
+  .text-title-large {
+    font-size: 1rem;
+    line-height: 1.22;
+  }
+
+  .text-headline-medium {
+    font-size: 1.12rem;
+    line-height: 1.18;
+  }
+
+  .text-body-medium {
+    font-size: 0.88rem;
+    line-height: 1.45;
+  }
 }
 
 .judge-mode-header,
@@ -248,7 +269,7 @@
 
 .judge-route-steps {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.45rem;
 }
 
@@ -342,7 +363,7 @@
 
 .judge-context-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   gap: var(--space-s);
 
   article {
@@ -368,8 +389,37 @@
 }
 
 .judge-mode-actions {
+  position: sticky;
+  bottom: -0.1rem;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  justify-content: stretch;
+  padding-top: 0.45rem;
+  border-top: 1px solid rgba(26, 115, 232, 0.08);
+  background: rgba(255, 253, 248, 0.97);
+
+  > .judge-icon-button {
+    width: 100%;
+  }
+
+  > .judge-icon-button:first-child {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  > .judge-icon-button:last-child {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
   .m3-button {
-    min-width: 12.5rem;
+    grid-column: 1 / -1;
+    grid-row: 1;
+    min-width: 0;
+    width: 100%;
+    min-height: 2.9rem;
+    white-space: normal;
   }
 }
 
