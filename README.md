@@ -15,7 +15,7 @@ The repository also includes a clean Agent Builder and MongoDB MCP integration p
 
 The Guide page includes a simulated agent environment that shows this planned architecture in the browser: simulated Google Sign-In consent, MongoDB MCP-style reads, Agent Builder and Gemini-style reasoning, and evidence-backed local output. It is explicitly frontend-only and makes no cloud calls.
 
-The app also includes Judge Mode, a guided no-cost walkthrough that takes reviewers through the strongest demo path: Home, Connect, Briefing, evidence, Ask Atlas, source-gated refusal, and Trust & security.
+The app also includes Judge Mode, a guided no-cost walkthrough that takes reviewers through the strongest demo path: Home, Connect, Briefing, evidence, Ask Atlas, source-gated refusal, and Trust & security. Judge Mode includes a route map, step jump controls, look-for cues, judge takeaways, and a reset button so reviewers can replay the proof quickly.
 
 ## Product Concept
 
@@ -140,7 +140,7 @@ The demo opens with Health, Travel, Integrity, Family, and Memory enabled so the
 - Assistant presence is represented as an abstract orb, not a realistic face.
 - The smart avatar shows what Atlas is watching, how much context is connected, and whether Memory is available.
 - Home includes a familiar Today / Tomorrow / Memory strip so the product feels personal before it becomes analytical.
-- Judge Mode gives reviewers a compact guided route through the strongest product story and source-gating proof.
+- Judge Mode gives reviewers a compact guided route through the strongest product story and source-gating proof, with route steps, look-for cues, judge takeaways, and reset control.
 - Home uses a generated immersive lifestyle/productivity hero image stored in `src/assets`.
 - Atlas has a repo-native SVG logo and favicon; it does not copy Google branding.
 
