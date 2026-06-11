@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import { ChevronLeft, ChevronRight, PlayCircle, Sparkles, X } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Sparkles, X } from 'lucide-react';
 import { AtlasSpark } from './AtlasSpark';
 
 const STEPS = [
   {
     id: 'start',
     shortLabel: 'Home',
-    eyebrow: 'Judge overlay',
+    eyebrow: 'Guided tour',
     title: 'Start with the morning story.',
     body: 'Atlas opens like a personal intelligence companion: one clear life narrative, one important insight, and simple next actions.',
     lookFor: 'A human product experience, not a dashboard.',
@@ -94,7 +94,7 @@ const STEPS = [
   {
     id: 'finish',
     shortLabel: 'Ready',
-    eyebrow: 'Ready to judge',
+    eyebrow: 'You are ready',
     title: 'The product story is complete.',
     body: 'The tour has shown the core loop: approved sources become a daily story, hidden risks become explainable, and missing sources block answers.',
     lookFor: 'A complete concept, not only isolated screens.',
@@ -112,9 +112,8 @@ const DEFAULT_SPOTLIGHT = {
   height: 260,
 };
 
-export function JudgeMode({
+export function ProductTour({
   isOpen,
-  onOpen,
   onClose,
   stepIndex,
   onStepChange,
@@ -226,12 +225,6 @@ export function JudgeMode({
     }
   };
 
-  const openTour = () => {
-    prepareStep(STEPS[0]);
-    onStepChange(0);
-    onOpen();
-  };
-
   const goToStep = (nextIndex) => {
     const safeIndex = Math.min(Math.max(nextIndex, 0), STEPS.length - 1);
     const nextStep = STEPS[safeIndex];
@@ -251,21 +244,13 @@ export function JudgeMode({
   };
 
   if (!isOpen) {
-    return (
-      <button type="button" className="judge-mode-launcher" onClick={openTour} aria-label="Start Judge overlay">
-        <span className="judge-launch-icon"><PlayCircle size={20} aria-hidden="true" /></span>
-        <span>
-          <strong>Judge overlay</strong>
-          <small>Spotlight the demo</small>
-        </span>
-      </button>
-    );
+    return null;
   }
 
   return (
     <>
       <div
-        className="judge-tour-spotlight"
+        className="product-tour-spotlight"
         style={{
           '--spotlight-top': `${spotlight.top}px`,
           '--spotlight-left': `${spotlight.left}px`,
@@ -276,42 +261,42 @@ export function JudgeMode({
       />
 
       <aside
-        className="judge-tour-card"
+        className="product-tour-card"
         style={{
           '--tour-card-top': `${cardPosition.top}px`,
           '--tour-card-left': `${cardPosition.left}px`,
         }}
-        aria-label="Judge overlay guided tour"
+        aria-label="Atlas guided tour"
       >
-        <header className="judge-tour-header">
-          <div className="judge-tour-title">
+        <header className="product-tour-header">
+          <div className="product-tour-title">
             <AtlasSpark size={30} active />
             <div>
               <p className="eyebrow">{step.eyebrow}</p>
               <h2 className="text-title-medium">{step.shortLabel}</h2>
             </div>
           </div>
-          <button type="button" className="judge-icon-button" onClick={onClose} aria-label="Close Judge overlay">
+          <button type="button" className="tour-icon-button" onClick={onClose} aria-label="Close guided tour">
             <X size={18} aria-hidden="true" />
           </button>
         </header>
 
-        <div className="judge-progress" aria-label={`Step ${stepIndex + 1} of ${STEPS.length}`}>
+        <div className="tour-progress" aria-label={`Step ${stepIndex + 1} of ${STEPS.length}`}>
           <span style={{ width: `${progress}%` }} />
         </div>
 
-        <div className="judge-tour-copy" aria-live="polite">
-          <span className="judge-step-count">Step {stepIndex + 1} of {STEPS.length}</span>
+        <div className="product-tour-copy" aria-live="polite">
+          <span className="tour-step-count">Step {stepIndex + 1} of {STEPS.length}</span>
           <h3 className="text-title-large">{step.title}</h3>
           <p className="text-body-medium">{step.body}</p>
         </div>
 
-        <footer className="judge-tour-actions">
+        <footer className="product-tour-actions">
           <button
             type="button"
-            className="judge-icon-button"
+            className="tour-icon-button"
             onClick={() => goToStep(stepIndex - 1)}
-            aria-label="Previous Judge overlay step"
+            aria-label="Previous guided tour step"
             disabled={stepIndex === 0}
           >
             <ChevronLeft size={18} aria-hidden="true" />
@@ -324,9 +309,9 @@ export function JudgeMode({
 
           <button
             type="button"
-            className="judge-icon-button"
+            className="tour-icon-button"
             onClick={() => goToStep(stepIndex + 1)}
-            aria-label="Next Judge overlay step"
+            aria-label="Next guided tour step"
             disabled={isLastStep}
           >
             <ChevronRight size={18} aria-hidden="true" />
@@ -335,14 +320,14 @@ export function JudgeMode({
 
       </aside>
 
-      <div className="judge-tour-stepper" aria-label="Tour steps">
+      <div className="product-tour-stepper" aria-label="Tour steps">
         {STEPS.map((item, index) => (
           <button
             key={item.id}
             type="button"
             className={index === stepIndex ? 'active' : ''}
             onClick={() => goToStep(index)}
-            aria-label={`Go to ${item.shortLabel} Judge overlay step`}
+            aria-label={`Go to ${item.shortLabel} guided tour step`}
             aria-current={index === stepIndex ? 'step' : undefined}
           >
             <span>{index + 1}</span>

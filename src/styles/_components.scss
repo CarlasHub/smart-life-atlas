@@ -107,54 +107,7 @@
   }
 }
 
-.judge-mode-launcher {
-  position: fixed;
-  left: calc(var(--sidebar-width) + var(--space-m));
-  bottom: var(--space-l);
-  z-index: 45;
-  width: auto;
-  min-height: 2.9rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 0.6rem;
-  border: 1px solid rgba(26, 115, 232, 0.18);
-  border-radius: var(--md-sys-shape-corner-full);
-  padding: 0.45rem 0.85rem 0.45rem 0.5rem;
-  background:
-    radial-gradient(circle at 92% 8%, rgba(251, 188, 4, 0.22), transparent 32%),
-    rgba(255, 255, 255, 0.88);
-  color: var(--md-sys-color-primary);
-  box-shadow: var(--shadow-lift);
-  backdrop-filter: blur(1rem);
-  cursor: pointer;
-  font-family: inherit;
-  @include label-large;
-
-  > span:last-child {
-    display: grid;
-    gap: 0.05rem;
-    text-align: left;
-  }
-
-  small {
-    color: var(--md-sys-color-on-surface-variant);
-    @include label-small;
-  }
-}
-
-.judge-launch-icon {
-  width: 2.1rem;
-  height: 2.1rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: var(--md-sys-shape-corner-full);
-  background: var(--md-sys-color-primary);
-  color: var(--md-sys-color-on-primary);
-}
-
-.judge-tour-spotlight {
+.product-tour-spotlight {
   position: fixed;
   top: var(--spotlight-top);
   left: var(--spotlight-left);
@@ -171,7 +124,7 @@
   transition: top 180ms ease, left 180ms ease, width 180ms ease, height 180ms ease;
 }
 
-.judge-tour-card {
+.product-tour-card {
   position: fixed;
   top: var(--tour-card-top);
   left: var(--tour-card-left);
@@ -191,20 +144,20 @@
   overflow-y: auto;
 }
 
-.judge-tour-header,
-.judge-tour-title,
-.judge-tour-actions {
+.product-tour-header,
+.product-tour-title,
+.product-tour-actions {
   display: flex;
   align-items: center;
   gap: var(--space-s);
 }
 
-.judge-tour-header,
-.judge-tour-actions {
+.product-tour-header,
+.product-tour-actions {
   justify-content: space-between;
 }
 
-.judge-tour-title {
+.product-tour-title {
   min-width: 0;
 
   h2 {
@@ -212,7 +165,7 @@
   }
 }
 
-.judge-icon-button {
+.tour-icon-button {
   flex: 0 0 auto;
   width: 2.6rem;
   height: 2.6rem;
@@ -231,7 +184,7 @@
   }
 }
 
-.judge-progress {
+.tour-progress {
   height: 0.42rem;
   border-radius: var(--md-sys-shape-corner-full);
   background: rgba(26, 115, 232, 0.12);
@@ -248,7 +201,7 @@
   }
 }
 
-.judge-tour-copy {
+.product-tour-copy {
   display: grid;
   gap: var(--space-xs);
 
@@ -262,7 +215,7 @@
   }
 }
 
-.judge-step-count {
+.tour-step-count {
   width: fit-content;
   border-radius: var(--md-sys-shape-corner-full);
   padding: 0.3rem 0.65rem;
@@ -271,7 +224,7 @@
   @include label-small;
 }
 
-.judge-tour-actions {
+.product-tour-actions {
   position: sticky;
   bottom: -0.1rem;
   display: grid;
@@ -281,7 +234,7 @@
   border-top: 1px solid rgba(26, 115, 232, 0.08);
   background: rgba(255, 253, 248, 0.96);
 
-  > .judge-icon-button {
+  > .tour-icon-button {
     width: 2.6rem;
   }
 
@@ -293,7 +246,7 @@
   }
 }
 
-.judge-tour-stepper {
+.product-tour-stepper {
   position: fixed;
   left: 50%;
   bottom: var(--space-l);

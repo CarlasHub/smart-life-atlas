@@ -6,7 +6,7 @@ import { AskAtlas } from './components/AskAtlas';
 import { Connect } from './components/Connect';
 import { Guide } from './components/Guide';
 import { AtlasLogo } from './components/AtlasLogo';
-import { JudgeMode } from './components/JudgeMode';
+import { ProductTour } from './components/ProductTour';
 import { Home, Zap, History, MessageSquare, ShieldCheck, Info } from 'lucide-react';
 import './styles/main.scss';
 
@@ -22,8 +22,8 @@ const NAV_ITEMS = [
 function App() {
   const [activeView, setActiveView] = useState('home');
   const [activeDimensions, setActiveDimensions] = useState(['health', 'travel', 'integrity', 'family', 'memory']);
-  const [judgeModeOpen, setJudgeModeOpen] = useState(false);
-  const [judgeStepIndex, setJudgeStepIndex] = useState(0);
+  const [productTourOpen, setProductTourOpen] = useState(true);
+  const [productTourStepIndex, setProductTourStepIndex] = useState(0);
   const [askDemoQuery, setAskDemoQuery] = useState(null);
   const [guideTab, setGuideTab] = useState('steps');
   const mainViewportRef = useRef(null);
@@ -74,11 +74,6 @@ function App() {
     setAskDemoQuery(null);
   }, []);
 
-  const startJudgeMode = () => {
-    setJudgeModeOpen(true);
-    setJudgeStepIndex(0);
-  };
-
   const renderView = () => {
     switch (activeView) {
       case 'briefing':
@@ -93,7 +88,7 @@ function App() {
         return <Guide activeDimensions={activeDimensions} onNavigate={navigateTo} activeTab={guideTab} onTabChange={setGuideTab} />;
       case 'home':
       default:
-        return <HomeScreen activeDimensions={activeDimensions} onNavigate={navigateTo} onStartJudgeMode={startJudgeMode} />;
+        return <HomeScreen activeDimensions={activeDimensions} onNavigate={navigateTo} />;
     }
   };
 
@@ -127,12 +122,11 @@ function App() {
         {renderView()}
       </main>
 
-      <JudgeMode
-        isOpen={judgeModeOpen}
-        onOpen={() => setJudgeModeOpen(true)}
-        onClose={() => setJudgeModeOpen(false)}
-        stepIndex={judgeStepIndex}
-        onStepChange={setJudgeStepIndex}
+      <ProductTour
+        isOpen={productTourOpen}
+        onClose={() => setProductTourOpen(false)}
+        stepIndex={productTourStepIndex}
+        onStepChange={setProductTourStepIndex}
         onNavigate={navigateTo}
         onRestoreSources={restoreDemoSources}
         onDisableTravel={disableTravelForDemo}

@@ -15,7 +15,7 @@ The repository also includes a clean Agent Builder and MongoDB MCP integration p
 
 The Guide page includes a simulated agent environment that shows this planned architecture in the browser: simulated Google Sign-In consent, MongoDB MCP-style reads, Agent Builder and Gemini-style reasoning, and evidence-backed local output. It is explicitly frontend-only and makes no cloud calls.
 
-The app also includes a Judge overlay with coach marks and spotlight highlights. It takes reviewers through the strongest demo path: Home, Connect, Briefing, evidence, Ask Atlas, source-gated refusal, and Trust & security without covering the whole interface.
+The app also includes an automatic guided product tour with coach marks and spotlight highlights. It starts when the app loads and takes reviewers through the strongest demo path: Home, Connect, Briefing, evidence, Ask Atlas, source-gated refusal, and Trust & security without covering the whole interface.
 
 Home now includes Atlas Life Story Mode, a cost-free interactive story surface that turns the same local synthetic evidence into a clickable daily narrative. Judges can move between Daily story, Risk lens, and Next step views, click each story beat, and see evidence appear only when the required life areas are connected.
 
@@ -120,14 +120,14 @@ This is not a live Google Cloud deployment. A full deployment still requires a G
 ## Demo Flow
 
 1. Open the app with `npm run dev`.
-2. Click Judge overlay for the fastest guided path, or start manually on Home and read: "Good morning, Carla. Here is what Atlas noticed."
+2. Follow the automatic guided tour for the fastest path, or close it and start manually on Home by reading: "Good morning, Carla. Here is what Atlas noticed."
 3. On Home, use Atlas Life Story Mode to switch between Daily story, Risk lens, and Next step, then click each story beat from procedure to Clause 8.1.
 4. Open Connect and treat each life-area card as a simulated Google consent scope.
 5. Open Briefing to view the Post-Op Compliance Trap.
 6. Use the Agent trace to watch Atlas connect approved sources, recovery rules, deadlines, evidence, and the Clause 8.1 workaround.
 7. Inspect evidence cards for the procedure, 36-hour no-fly restriction, 19:30 flight, Friday 09:00 legal signing, Friday 12:00 legal deadline, $250,000 valuation risk, and Clause 8.1 remote notary workaround.
 8. Open Ask Atlas and ask "Why is tomorrow risky?"
-9. Use Judge overlay or Connect to turn Travel off, then ask the same risky-tomorrow question again and verify the refusal message.
+9. Use the guided tour or Connect to turn Travel off, then ask the same risky-tomorrow question again and verify the refusal message.
 10. Return Home and verify the affected Life Story Mode beats are paused until Travel is connected again.
 11. Open Memory and review the 11 June 2022 Lisbon answer with confidence, evidence, and uncertainty.
 12. Open Guide, switch to the Trust & security tab, and review the Platform status and Simulated agent environment sections for the static demo, Agent Builder proof, and backend path.
@@ -145,7 +145,7 @@ The demo opens with Health, Travel, Integrity, Family, and Memory enabled so the
 - The smart avatar shows what Atlas is watching, how much context is connected, and whether Memory is available.
 - Home includes a familiar Today / Tomorrow / Memory strip so the product feels personal before it becomes analytical.
 - Atlas Life Story Mode makes Home feel more alive by letting reviewers explore the daily story, risk lens, next step, source gates, and evidence without leaving the landing experience.
-- Judge overlay gives reviewers a compact coach-mark path through the strongest product story and source-gating proof, with spotlight highlights.
+- Automatic guided tour gives reviewers a compact coach-mark path through the strongest product story and source-gating proof, with spotlight highlights.
 - Home uses a generated immersive lifestyle/productivity hero image stored in `src/assets`.
 - Atlas has a repo-native SVG logo and favicon; it does not copy Google branding.
 
@@ -158,7 +158,7 @@ The demo opens with Health, Travel, Integrity, Family, and Memory enabled so the
 - The smart avatar uses text labels and status rows rather than relying on animation or color alone.
 - Atlas Life Story Mode uses real buttons, visible selected states, evidence labels, and source-gated status text rather than color-only meaning.
 - The Guide page uses accessible in-page tabs for First steps and Trust & security.
-- Judge overlay uses real buttons, visible progress, and the same app state as the main source toggles.
+- Guided tour uses real buttons, visible progress, and the same app state as the main source toggles.
 - Evidence uses expandable `details` elements.
 - Confidence values use meter semantics where appropriate.
 - Copy avoids dense jargon and keeps next actions visible.
@@ -230,8 +230,8 @@ Playwright is not installed in this prototype. Use this manual checklist after U
 - Toggle Memory off and verify Memory and the Lisbon Ask Atlas answer are gated.
 - Toggle Family off and verify "What am I forgetting?" is gated.
 - Re-enable sources and verify the Post-Op Compliance Trap and 11 June 2022 Memory answer return.
-- Open Judge overlay from Home or the floating overlay button and step through the full guided demo.
-- In Judge overlay, run the refusal step and verify Travel is removed from the connected areas and Ask Atlas refuses the risky-tomorrow answer.
+- Reload the app and step through the automatic guided tour.
+- In the guided tour, run the refusal step and verify Travel is removed from the connected areas and Ask Atlas refuses the risky-tomorrow answer.
 - On Home, switch every Atlas Life Story Mode lens and click every story beat.
 - Turn Travel off, return Home, and verify the flight and signing story beats explain which source is missing.
 - In Briefing, click each Agent trace node and preset question chip to verify the detail panel changes.
