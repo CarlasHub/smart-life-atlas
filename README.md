@@ -123,14 +123,15 @@ This is not a live Google Cloud deployment. A full deployment still requires a G
 2. Follow the automatic guided tour for the fastest path, or close it and start manually on Home by reading: "Good morning, Carla. Here is what Atlas noticed."
 3. On Home, use Atlas Life Story Mode to switch between Daily story, Risk lens, and Next step, then click each story beat from procedure to Clause 8.1.
 4. Open Connect and treat each life-area card as a simulated Google consent scope.
-5. Open Briefing to view the Post-Op Compliance Trap.
-6. Use the Agent trace to watch Atlas connect approved sources, recovery rules, deadlines, evidence, and the Clause 8.1 workaround.
-7. Inspect evidence cards for the procedure, 36-hour no-fly restriction, 19:30 flight, Friday 09:00 legal signing, Friday 12:00 legal deadline, $250,000 valuation risk, and Clause 8.1 remote notary workaround.
-8. Open Ask Atlas and ask "Why is tomorrow risky?"
-9. Use the guided tour or Connect to turn Travel off, then ask the same risky-tomorrow question again and verify the refusal message.
-10. Return Home and verify the affected Life Story Mode beats are paused until Travel is connected again.
-11. Open Memory and review the 11 June 2022 Lisbon answer with confidence, evidence, and uncertainty.
-12. Open Guide, switch to the Trust & security tab, and review the Platform status and Simulated agent environment sections for the static demo, Agent Builder proof, and backend path.
+5. Review Sync status, last sync times, and the Sync now controls for approved synthetic app signals.
+6. Open Briefing to view the Post-Op Compliance Trap.
+7. Use the Agent trace to watch Atlas connect approved sources, recovery rules, deadlines, evidence, and the Clause 8.1 workaround.
+8. Inspect evidence cards for the procedure, 36-hour no-fly restriction, 19:30 flight, Friday 09:00 legal signing, Friday 12:00 legal deadline, $250,000 valuation risk, and Clause 8.1 remote notary workaround.
+9. Open Ask Atlas and ask "Why is tomorrow risky?"
+10. Use the guided tour or Connect to turn Travel off, then ask the same risky-tomorrow question again and verify the refusal message.
+11. Return Home and verify the affected Life Story Mode beats are paused until Travel is connected again.
+12. Open Memory and review the 11 June 2022 Lisbon answer with confidence, evidence, and uncertainty.
+13. Open Guide, switch to the Trust & security tab, and review the Platform status and Simulated agent environment sections for the static demo, Agent Builder proof, and backend path.
 
 The demo opens with Health, Travel, Integrity, Family, and Memory enabled so the main narrative is visible immediately. Money remains off by default. Turning any required area off removes it from the reasoning path.
 
@@ -146,6 +147,7 @@ The demo opens with Health, Travel, Integrity, Family, and Memory enabled so the
 - Home includes a familiar Today / Tomorrow / Memory strip so the product feels personal before it becomes analytical.
 - Atlas Life Story Mode makes Home feel more alive by letting reviewers explore the daily story, risk lens, next step, source gates, and evidence without leaving the landing experience.
 - Automatic guided tour gives reviewers a compact coach-mark path through the strongest product story and source-gating proof, with spotlight highlights.
+- Connect includes simulated sync status, last sync times, and manual Sync now controls so users can see when approved synthetic app signals were checked.
 - Home uses a generated immersive lifestyle/productivity hero image stored in `src/assets`.
 - Atlas has a repo-native SVG logo and favicon; it does not copy Google branding.
 
@@ -227,6 +229,8 @@ Playwright is not installed in this prototype. Use this manual checklist after U
 - At 768 width, verify the bottom navigation appears with no clipped labels.
 - At 390 width, verify no horizontal scrolling, clipped buttons, or overlapping text.
 - Toggle Health, Travel, and Integrity off one at a time and verify Briefing becomes gated.
+- In Connect, click Sync now and verify approved app sources temporarily show syncing, then update last sync time.
+- In Connect, verify disconnected app sources show Not connected and have disabled sync controls.
 - Toggle Memory off and verify Memory and the Lisbon Ask Atlas answer are gated.
 - Toggle Family off and verify "What am I forgetting?" is gated.
 - Re-enable sources and verify the Post-Op Compliance Trap and 11 June 2022 Memory answer return.

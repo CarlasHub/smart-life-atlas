@@ -115,6 +115,7 @@
   .assistant-hero,
   .home-grid,
   .personal-context-strip,
+  .sync-console,
   .life-story-header,
   .life-story-shell,
   .briefing-grid,
@@ -170,6 +171,10 @@
     align-items: flex-start;
   }
 
+  .sync-console-actions {
+    justify-content: flex-start;
+  }
+
   .life-story-score {
     justify-items: start;
   }
@@ -200,6 +205,7 @@
   .life-story-mode,
   .agent-trace,
   .life-strip,
+  .sync-console,
   .life-brief-panel,
   .memory-search,
   .report-card,
@@ -237,6 +243,7 @@
   }
 
   .hero-actions,
+  .sync-console-actions,
   .life-story-actions,
   .guide-footer,
   .preset-queries {

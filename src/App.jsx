@@ -7,6 +7,7 @@ import { Connect } from './components/Connect';
 import { Guide } from './components/Guide';
 import { AtlasLogo } from './components/AtlasLogo';
 import { ProductTour } from './components/ProductTour';
+import { APP_SOURCES } from './data/sources';
 import { Home, Zap, History, MessageSquare, ShieldCheck, Info } from 'lucide-react';
 import './styles/main.scss';
 
@@ -19,6 +20,20 @@ const NAV_ITEMS = [
   { id: 'guide', label: 'Guide', icon: Info },
 ];
 
+function createInitialSourceSync() {
+  const now = Date.now();
+
+  return Object.fromEntries(
+    APP_SOURCES.map((source, index) => [
+      source.id,
+      {
+        status: 'idle',
+        lastSyncedAt: new Date(now - (index + 2) * 6 * 60 * 1000).toISOString(),
+      }
+    ])
+  );
+}
+
 function App() {
   const [activeView, setActiveView] = useState('home');
   const [activeDimensions, setActiveDimensions] = useState(['health', 'travel', 'integrity', 'family', 'memory']);
@@ -26,7 +41,9 @@ function App() {
   const [productTourStepIndex, setProductTourStepIndex] = useState(0);
   const [askDemoQuery, setAskDemoQuery] = useState(null);
   const [guideTab, setGuideTab] = useState('steps');
+  const [sourceSync, setSourceSync] = useState(createInitialSourceSync);
   const mainViewportRef = useRef(null);
+  const syncTimersRef = useRef([]);
 
   useEffect(() => {
     if (mainViewportRef.current) {
@@ -34,6 +51,10 @@ function App() {
     }
     window.scrollTo(0, 0);
   }, [activeView]);
+
+  useEffect(() => () => {
+    syncTimersRef.current.forEach((timer) => window.clearTimeout(timer));
+  }, []);
 
   const toggleDimension = (id) => {
     setActiveDimensions((prev) =>
@@ -74,6 +95,45 @@ function App() {
     setAskDemoQuery(null);
   }, []);
 
+  const syncSources = useCallback((sourceIds) => {
+    const ids = [...new Set(sourceIds)].filter(Boolean);
+
+    if (!ids.length) {
+      return;
+    }
+
+    setSourceSync((prev) => {
+      const next = { ...prev };
+      ids.forEach((id) => {
+        next[id] = {
+          ...(next[id] || {}),
+          status: 'syncing',
+        };
+      });
+      return next;
+    });
+
+    const timer = window.setTimeout(() => {
+      const syncedAt = new Date().toISOString();
+
+      setSourceSync((prev) => {
+        const next = { ...prev };
+        ids.forEach((id) => {
+          next[id] = {
+            ...(next[id] || {}),
+            status: 'idle',
+            lastSyncedAt: syncedAt,
+          };
+        });
+        return next;
+      });
+
+      syncTimersRef.current = syncTimersRef.current.filter((savedTimer) => savedTimer !== timer);
+    }, 700);
+
+    syncTimersRef.current.push(timer);
+  }, []);
+
   const renderView = () => {
     switch (activeView) {
       case 'briefing':
@@ -83,7 +143,7 @@ function App() {
       case 'ask':
         return <AskAtlas activeDimensions={activeDimensions} onNavigate={navigateTo} demoQuery={askDemoQuery} onDemoQueryHandled={clearAskDemoQuery} />;
       case 'connect':
-        return <Connect activeDimensions={activeDimensions} onToggle={toggleDimension} />;
+        return <Connect activeDimensions={activeDimensions} onToggle={toggleDimension} sourceSync={sourceSync} onSyncSources={syncSources} />;
       case 'guide':
         return <Guide activeDimensions={activeDimensions} onNavigate={navigateTo} activeTab={guideTab} onTabChange={setGuideTab} />;
       case 'home':
