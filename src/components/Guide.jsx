@@ -1,4 +1,5 @@
 import { CheckCircle2, ChevronRight, Cloud, Database, ShieldCheck } from 'lucide-react';
+import { SimulatedEnvironment } from './SimulatedEnvironment';
 
 const STEPS = [
   { title: 'Choose life areas', desc: 'Turn on only the areas Atlas may use, such as Health, Travel, Money, Family, Integrity, or Memory.' },
@@ -27,7 +28,7 @@ const PLATFORM_STATUS = [
   },
 ];
 
-export function Guide({ onNavigate }) {
+export function Guide({ activeDimensions, onNavigate }) {
   return (
     <div className="main-content guide-page animate-fade-in">
       <header className="page-kicker">
@@ -74,6 +75,8 @@ export function Guide({ onNavigate }) {
           Use the Vercel link for the live demo and the GitHub link for source code. GitHub Pages is fine for static hosting, but it cannot run the future agent backend.
         </p>
       </section>
+
+      <SimulatedEnvironment activeDimensions={activeDimensions} />
 
       <footer className="guide-footer">
         <button type="button" className="m3-button primary" onClick={() => onNavigate('connect')}>

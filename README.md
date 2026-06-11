@@ -13,6 +13,8 @@ The submitted web app is a React/Vite static prototype. It has no backend, no re
 
 The repository also includes a clean Agent Builder and MongoDB MCP integration proof under `agent/`. It provides Agent Builder instructions, MongoDB-shaped seed collections, an MCP server configuration example using `@mongodb-js/mongodb-mcp-server`, and a local verifier script that proves the same source-gated reasoning contract without requiring cloud credentials.
 
+The Guide page includes a simulated agent environment that shows this planned architecture in the browser: simulated Google Sign-In consent, MongoDB MCP-style reads, Agent Builder and Gemini-style reasoning, and evidence-backed local output. It is explicitly frontend-only and makes no cloud calls.
+
 ## Product Concept
 
 Atlas is built around a simple Google-native idea: people already live across Gmail, Calendar, Docs, Maps, Photos, health apps, finance apps, family messages, school portals, work tools, and services connected through Google Sign-In, but no trusted assistant turns those fragments into a coherent daily life story.
@@ -116,7 +118,7 @@ This is not a live Google Cloud deployment. A full deployment still requires a G
 7. Open Memory and review the 11 June 2022 Lisbon answer with confidence, evidence, and uncertainty.
 8. Open Ask Atlas and try the preset questions.
 9. Toggle life areas off to verify that Atlas refuses to answer when the required authorized source is unavailable.
-10. Open Guide and review the Platform status section for the static demo, Agent Builder proof, and backend path.
+10. Open Guide and review the Platform status and Simulated agent environment sections for the static demo, Agent Builder proof, and backend path.
 
 The demo opens with Health, Travel, Integrity, Family, and Memory enabled so the main narrative is visible immediately. Money remains off by default. Turning any required area off removes it from the reasoning path.
 
@@ -212,4 +214,5 @@ Playwright is not installed in this prototype. Use this manual checklist after U
 - Toggle Family off and verify "What am I forgetting?" is gated.
 - Re-enable sources and verify the Post-Op Compliance Trap and 11 June 2022 Memory answer return.
 - In Briefing, click each Agent trace node and preset question chip to verify the detail panel changes.
+- In Guide, click each Simulated agent environment stage and verify the detail panel changes without network access.
 - Keyboard-tab through navigation, source toggles, preset questions, evidence details, and guide buttons.

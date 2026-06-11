@@ -47,7 +47,7 @@ function App() {
       case 'connect':
         return <Connect activeDimensions={activeDimensions} onToggle={toggleDimension} />;
       case 'guide':
-        return <Guide onNavigate={setActiveView} />;
+        return <Guide activeDimensions={activeDimensions} onNavigate={setActiveView} />;
       case 'home':
       default:
         return <HomeScreen activeDimensions={activeDimensions} onNavigate={setActiveView} />;

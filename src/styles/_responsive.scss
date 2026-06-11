@@ -98,6 +98,8 @@
   .memory-columns,
   .trace-workbench,
   .platform-status-grid,
+  .sim-env-header,
+  .sim-env-workbench,
   .app-source-grid {
     grid-template-columns: 1fr;
   }
@@ -174,6 +176,7 @@
   .report-card,
   .impact-summary,
   .platform-status,
+  .sim-env,
   .soft-panel,
   .memory-answer {
     padding: var(--space-m);
@@ -222,6 +225,18 @@
 
   .trace-score {
     justify-items: start;
+  }
+
+  .sim-env-guards {
+    grid-template-columns: 1fr;
+  }
+
+  .sim-env-stage {
+    grid-template-columns: auto minmax(0, 1fr);
+
+    .sim-env-stage-index {
+      display: none;
+    }
   }
 
   .app-item,

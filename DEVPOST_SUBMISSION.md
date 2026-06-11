@@ -69,6 +69,8 @@ The repository includes a clean integration package under `agent/`:
 - `agent/mongodb/mcp-server.example.json` shows how to start the official MongoDB MCP server package.
 - `scripts/agent-proof.mjs` verifies the source-gated reasoning flow locally with the same synthetic evidence used by the app.
 
+The live UI also includes a Simulated Agent Environment in the Guide page. It shows the intended Google Sign-In consent, MongoDB MCP read, Agent Builder/Gemini reasoning, and evidence-backed answer flow without a backend or cloud calls.
+
 Judges can run:
 
 ```bash
